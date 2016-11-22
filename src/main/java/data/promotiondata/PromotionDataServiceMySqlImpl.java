@@ -56,7 +56,7 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 	@Override
 	public ArrayList <PromotionPO> findsPromotion(int id) throws RemoteException {
 		// TODO Auto-generated method stub
-		ArrayList<PromotionPO> list = new ArrayList<>();
+		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();
 		
 		try {
 			statement = connect.prepareStatement("select * from promotion where id = ?");
@@ -95,7 +95,7 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 	@Override
 	public ArrayList <PromotionPO> findsPromotion(int id, Date start) throws RemoteException {
 		// TODO Auto-generated method stub
-		ArrayList<PromotionPO> list = new ArrayList<>();
+		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();
 		
 		try {
 			statement = connect.prepareStatement("select * from promotion where id = ? and start = ?");
@@ -131,7 +131,7 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 	@Override
 	public ArrayList <PromotionPO> findsPromotion(int id, String content) throws RemoteException {
 		// TODO Auto-generated method stub
-		ArrayList<PromotionPO> list = new ArrayList<>();
+		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();
 		list = findsPromotion(id);
 		for(int i = 0; i< list.size(); i++){
 			PromotionPO po = list.get(i);

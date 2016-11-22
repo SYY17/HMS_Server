@@ -170,7 +170,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 	private ArrayList<String> toString (HotelPO hpo){
 		//列：id, workername, hotelname, businessarea, address
 		//star, phone, roomtype, roomnumber, description, rate
-		ArrayList<String> list = new ArrayList<>();
+		ArrayList<String> list = new ArrayList<String>();
 		
 		//按列顺序依次添加
 		list.add(String.valueOf(hpo.getHotelID()));
@@ -189,7 +189,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 	}
 	
 	private HashSet<RoomType> getRoomTypes(HotelPO hpo){
-		HashSet<RoomType> set = new HashSet<>();
+		HashSet<RoomType> set = new HashSet<RoomType>();
 		
 		//遍历HotelPO中的rooms的type
 		ArrayList<RoomPO> list = hpo.getRooms();
