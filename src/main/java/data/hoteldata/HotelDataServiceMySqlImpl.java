@@ -84,8 +84,10 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 	public void updateHotel(HotelPO hpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
-			//为防止重复插入信息应进行检查
-			if(findHotel(hpo.getHotelName()) != null) return;
+			/*//为防止重复插入信息应进行检查
+			if(findHotel(hpo.getHotelName()) != null) return;*/
+			//为防止没有原始信息应进行检查
+			if(findHotel(hpo.getHotelName()) == null) return;
 			
 			//列：id, workername, hotelname, businessarea, address
 			//star, phone, roomtype, roomnumber, description, rate
@@ -115,6 +117,43 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 	@Override
 	public HotelPO findHotel(String name) throws RemoteException {
 		// TODO Auto-generated method stub
+		try {
+			//列：id, workername, hotelname, businessarea, address
+			//star, phone, roomtype, roomnumber, description, rate
+			
+			statement = connect.prepareStatement("select * from hotel where hotelname = ?");
+			statement.setString(1, name);
+			result = statement.executeQuery(); 
+			
+			int id = -1;
+			String workername = "";
+			String businessarea = "";
+			String address = "";
+			int star = -1;
+			String phone = "";
+			//RoomType roomtype = null;
+			int roomnumber = -1;
+			String description = "";
+			int rate = -1;
+			
+			while(result.next()){
+				id = Integer.valueOf(result.getString(1));
+				workername = result.getString(2);
+				businessarea = result.getString(4);
+				address = result.getString(5);
+				star = Integer.valueOf(result.getString(6));
+				phone = result.getString(7);
+				//roomtype = (RoomType)(Object)(result.getString(8));//????
+				roomnumber = Integer.valueOf(result.getString(9));
+				description = result.getString(10);
+				rate = Integer.valueOf(result.getString(11));
+			}
+			
+			return new HotelPO(id, name, address, businessarea, description, star, roomnumber, null, rate, workername, phone);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -128,6 +167,52 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 	@Override
 	public ArrayList<HotelPO> findsHotel(String field, String value) throws RemoteException {
 		// TODO Auto-generated method stub
+		try {
+			//列：id, workername, hotelname, businessarea, address
+			//star, phone, roomtype, roomnumber, description, rate
+			
+			statement = connect.prepareStatement("select * from hotel where "+field+" = ?");
+			statement.setString(1, value);
+			result = statement.executeQuery(); 
+			
+			int id = -1;
+			String workername = "";
+			String hotelname = "";
+			String businessarea = "";
+			String address = "";
+			int star = -1;
+			String phone = "";
+			//RoomType roomtype = null;
+			int roomnumber = -1;
+			String description = "";
+			int rate = -1;
+			
+			ArrayList<HotelPO> hpoList = new ArrayList<HotelPO>();
+			
+			while(result.next()){
+				id = Integer.valueOf(result.getString(1));
+				workername = result.getString(2);
+				hotelname = result.getString(3);
+				businessarea = result.getString(4);
+				address = result.getString(5);
+				star = Integer.valueOf(result.getString(6));
+				phone = result.getString(7);
+				//roomtype = (RoomType)(Object)(result.getString(8));//????
+				roomnumber = Integer.valueOf(result.getString(9));
+				description = result.getString(10);
+				rate = Integer.valueOf(result.getString(11));
+				
+				HotelPO hpo = new HotelPO(id, hotelname, address, businessarea, description, star, roomnumber, null, rate, workername, phone);
+				hpoList.add(hpo);
+			}
+			
+			if(id != -1){
+				return hpoList;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -139,6 +224,51 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 	@Override
 	public ArrayList<HotelPO> findsHotel() throws RemoteException {
 		// TODO Auto-generated method stub
+		try {
+			//列：id, workername, hotelname, businessarea, address
+			//star, phone, roomtype, roomnumber, description, rate
+			
+			statement = connect.prepareStatement("select * from hotel");
+			result = statement.executeQuery(); 
+			
+			int id = -1;
+			String workername = "";
+			String hotelname = "";
+			String businessarea = "";
+			String address = "";
+			int star = -1;
+			String phone = "";
+			//RoomType roomtype = null;
+			int roomnumber = -1;
+			String description = "";
+			int rate = -1;
+			
+			ArrayList<HotelPO> hpoList = new ArrayList<HotelPO>();
+			
+			while(result.next()){
+				id = Integer.valueOf(result.getString(1));
+				workername = result.getString(2);
+				hotelname = result.getString(3);
+				businessarea = result.getString(4);
+				address = result.getString(5);
+				star = Integer.valueOf(result.getString(6));
+				phone = result.getString(7);
+				//roomtype = (RoomType)(Object)(result.getString(8));//????
+				roomnumber = Integer.valueOf(result.getString(9));
+				description = result.getString(10);
+				rate = Integer.valueOf(result.getString(11));
+				
+				HotelPO hpo = new HotelPO(id, hotelname, address, businessarea, description, star, roomnumber, null, rate, workername, phone);
+				hpoList.add(hpo);
+			}
+			
+			if(id != -1){
+				return hpoList;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
