@@ -406,6 +406,17 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 		// TODO Auto-generated method stub
 		return orderDataService.findOrder(id);
 	}
+	
+
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.creditdataservice.CreditDataService#findOrderByUserID(int)
+	 */
+	@Override
+	public ArrayList<OrderPO> findOrderByUserID(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataService.findOrderByUserID(id);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -618,5 +629,6 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 		// TODO Auto-generated method stub
 		creditDataService.finishCreditDataService();
 	}
+
 	
 }

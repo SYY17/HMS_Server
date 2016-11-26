@@ -21,7 +21,7 @@ public class ConfigurationServiceMySqlImpl implements ConfigurationService{
 		Connection connect = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/hms?useSSL=false", "root", "0000");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
