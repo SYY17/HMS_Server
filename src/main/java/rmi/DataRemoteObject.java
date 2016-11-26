@@ -8,7 +8,6 @@ import java.util.Date;
 import data.creditdata.CreditDataServiceMySqlImpl;
 import data.datafactory.DataFactoryServiceMySqlImpl;
 import data.hoteldata.HotelDataServiceMySqlImpl;
-import data.logindata.LoginDataServiceMySqlImpl;
 import data.orderdata.OrderDataServiceMySqlImpl;
 import data.promotiondata.PromotionDataServiceMySqlImpl;
 import data.roomdata.RoomDataServiceMySqlImpl;
@@ -16,7 +15,6 @@ import data.userdata.UserDataServiceMySqlImpl;
 import dataservice.creditdataservice.CreditDataService;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.hoteldataservice.HotelDataService;
-import dataservice.logindataservice.LoginDataService;
 import dataservice.orderdataservice.OrderDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.roomdataservice.RoomDataService;
@@ -31,7 +29,7 @@ import po.RoomType;
 import po.UserPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements CreditDataService, HotelDataService, 
-LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFactoryService{
+OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFactoryService{
 	
 	/**
 	 * 
@@ -39,7 +37,6 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 	private static final long serialVersionUID = 4029039744279087114L;
 	private CreditDataService creditDataService;
 	private HotelDataService hotelDataService;
-	private LoginDataService loginDataService;
 	private OrderDataService orderDataService;
 	private PromotionDataService promotionDataService;
 	private RoomDataService roomDataService;
@@ -49,7 +46,6 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 	protected DataRemoteObject() throws RemoteException {
 		creditDataService = new CreditDataServiceMySqlImpl();
 		hotelDataService = new HotelDataServiceMySqlImpl();
-		loginDataService = new LoginDataServiceMySqlImpl();
 		orderDataService = new OrderDataServiceMySqlImpl();
 		promotionDataService = new PromotionDataServiceMySqlImpl();
 		roomDataService = new RoomDataServiceMySqlImpl();
@@ -120,16 +116,6 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 		// TODO Auto-generated method stub
 		return dataFactoryService.getRoomData();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see dataservice.datafactoryservice.DataFactoryService#getLoginData()
-	 */
-	@Override
-	public LoginDataService getLoginData() throws RemoteException {
-		// TODO Auto-generated method stub
-		return dataFactoryService.getLoginData();
-	}
 	
 	/**
 	 * UserDataService
@@ -163,6 +149,26 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 	public void updateUser(UserPO upo) throws RemoteException {
 		// TODO Auto-generated method stub
 		userDataService.updateUser(upo);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.userdataservice.UserDataService#findUser(java.lang.String)
+	 */
+	@Override
+	public UserPO findUser(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return userDataService.findUser(username);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.userdataservice.UserDataService#findAll()
+	 */
+	@Override
+	public ArrayList<UserPO> findAll() throws RemoteException {
+		// TODO Auto-generated method stub
+		return userDataService.findAll();
 	}
 	
 	/*
@@ -407,14 +413,12 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 		return orderDataService.findOrder(id);
 	}
 	
-
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.creditdataservice.CreditDataService#findOrderByUserID(int)
+	 * @see dataservice.orderdataservice.OrderDataService#findOrderByUserID(int)
 	 */
 	@Override
-	public ArrayList<OrderPO> findOrderByUserID(int id) throws RemoteException {
-		// TODO Auto-generated method stub
+	public ArrayList<OrderPO> findOrderByUserID(int id) throws RemoteException{
 		return orderDataService.findOrderByUserID(id);
 	}
 
@@ -438,50 +442,6 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 		orderDataService.finishOrderDataService();
 	}
 	
-	/**
-	 * LoginDataService
-	 * 以下为登录/注册数据信息服务的通信实现
-	 */
-	/*
-	 * (non-Javadoc)
-	 * @see dataservice.logindataservice.LoginDataService#insertUser(java.lang.String, java.lang.String, int)
-	 */
-	@Override
-	public void insertUser(String username, String password, int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		loginDataService.insertUser(username, password, id);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see dataservice.logindataservice.LoginDataService#findUser(int)
-	 */
-	@Override
-	public UserPO findUser(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return loginDataService.findUser(id);
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see dataservice.logindataservice.LoginDataService#initLoginDataService()
-	 */
-	@Override
-	public void initLoginDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		loginDataService.initLoginDataService();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see dataservice.logindataservice.LoginDataService#finishLoginDataService()
-	 */
-	@Override
-	public void finishLoginDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		loginDataService.finishLoginDataService();
-	}
-
 	/**
 	 * HotelDataService
 	 * 以下为酒店数据信息服务的通信实现
@@ -629,6 +589,5 @@ LoginDataService, OrderDataService, PromotionDataService, RoomDataService, UserD
 		// TODO Auto-generated method stub
 		creditDataService.finishCreditDataService();
 	}
-
 	
 }

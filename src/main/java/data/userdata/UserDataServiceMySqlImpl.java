@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.userdataservice.UserDataService;
@@ -32,7 +33,7 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 		// TODO Auto-generated method stub
 		try {
 			//为防止重复插入信息应进行检查
-			if(findUser(upo.getID()) != null) return;
+			if(findUser(upo.getName()) != null) return;
 			
 			//列：id; username; password
 			statement = connect.prepareStatement("insert into user values(?, ?, ?)");
@@ -99,27 +100,27 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 	 * @throws RemoteException
 	 */
 	@Override
-	public UserPO findUser(int id) throws RemoteException {
+	public UserPO findUser(String username) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
-			statement = connect.prepareStatement("select * from user where id = ?");
+			statement = connect.prepareStatement("select * from user where username = ?");
 			
 			//列：id; username; password
-			statement.setString(1, String.valueOf(id));
+			statement.setString(1, username);
 			
 			result = statement.executeQuery();
 			
 			//CreditPO: id; credit
-			String username = "";
+			int id = -1;
 			String password = "";
 			
 			//遍历result
 			while(result.next()){
-				username = result.getString(2);
+				id = Integer.valueOf(result.getString(1));
 				password = result.getString(3);
 			}
 			
-			if(username != ""){
+			if(id != -1){
 				return new UserPO(id, username, password);
 			}
 			
@@ -148,6 +149,41 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 	public void finishUserDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		configure.finish(connect, statement, result);
+	}
+
+	/**
+	 * 
+	 * @return 查找并返回全部用户信息
+	 * @throws RemoteException
+	 */
+	@Override
+	public ArrayList<UserPO> findAll() throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<UserPO> list = new ArrayList<UserPO>(); 
+		try {
+			statement = connect.prepareStatement("select * from user");
+			
+			//列：id; username; password
+			result = statement.executeQuery();
+			
+			//CreditPO: id; credit
+			int id = 0;
+			String username = "";
+			String password = "";
+			
+			//遍历result
+			while(result.next()){
+				id = Integer.valueOf(result.getString(1));
+				username = result.getString(2);
+				password = result.getString(3);
+				list.add(new UserPO(id, username, password));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 }

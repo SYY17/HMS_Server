@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 
 import dataservice.creditdataservice.CreditDataService;
 import dataservice.hoteldataservice.HotelDataService;
-import dataservice.logindataservice.LoginDataService;
 import dataservice.orderdataservice.OrderDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.roomdataservice.RoomDataService;
@@ -48,10 +47,4 @@ public interface DataFactoryService extends Remote{
 	 * @return 获得房间数据
 	 */
 	public RoomDataService getRoomData() throws RemoteException;
-	
-	/**
-	 * 
-	 * @return 获得登录/注册数据
-	 */
-	public LoginDataService getLoginData() throws RemoteException;
 }

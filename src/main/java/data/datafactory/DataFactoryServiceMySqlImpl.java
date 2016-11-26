@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 
 import data.creditdata.CreditDataServiceMySqlImpl;
 import data.hoteldata.HotelDataServiceMySqlImpl;
-import data.logindata.LoginDataServiceMySqlImpl;
 import data.orderdata.OrderDataServiceMySqlImpl;
 import data.promotiondata.PromotionDataServiceMySqlImpl;
 import data.roomdata.RoomDataServiceMySqlImpl;
@@ -12,7 +11,6 @@ import data.userdata.UserDataServiceMySqlImpl;
 import dataservice.creditdataservice.CreditDataService;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.hoteldataservice.HotelDataService;
-import dataservice.logindataservice.LoginDataService;
 import dataservice.orderdataservice.OrderDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.roomdataservice.RoomDataService;
@@ -83,16 +81,5 @@ public class DataFactoryServiceMySqlImpl implements DataFactoryService{
 		// TODO Auto-generated method stub
 		RoomDataService roomData = new RoomDataServiceMySqlImpl();
 		return roomData;
-	}
-
-	/**
-	 * 
-	 * @return 获得登录/注册数据
-	 */
-	@Override
-	public LoginDataService getLoginData() throws RemoteException{
-		// TODO Auto-generated method stub
-		LoginDataService loginData = new LoginDataServiceMySqlImpl();
-		return loginData;
 	}
 }
