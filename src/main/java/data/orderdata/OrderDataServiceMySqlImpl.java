@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.orderdataservice.OrderDataService;
 import po.OrderPO;
@@ -35,7 +33,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public void insertOrder(OrderPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "insert into hms_order  values(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into order  values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			statement = (PreparedStatement) connect.prepareStatement(sql);
 			statement.setInt(1, po.getOrderID());
@@ -64,7 +62,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public void deleteOrder(int id) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "delete from hms_order where orderid='" + id + "'";
+		String sql = "delete from order where orderid='" + id + "'";
 		try {
 			statement = (PreparedStatement) connect.prepareStatement(sql);
 			int i = statement.executeUpdate();
@@ -83,7 +81,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public void updateOrder(int id, OrderStatus status) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "update hms_order set orderstatus='" + status + "' where orderid='" + id + "'";
+		String sql = "update order set orderstatus='" + status + "' where orderid='" + id + "'";
 		try {
 			statement = (PreparedStatement) connect.prepareStatement(sql);
 			int i = statement.executeUpdate();
@@ -102,7 +100,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public OrderPO findOrder(int id) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "select * from hms_order where orderid='" + id + "'";
+		String sql = "select * from order where orderid='" + id + "'";
 		try {
 			statement = (PreparedStatement) connect.prepareStatement(sql);
 			ResultSet rs = statement.executeQuery();
@@ -135,9 +133,10 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	public ArrayList<OrderPO> findOrderByUserID(int id) throws RemoteException {
 		// TODO finish the method
 		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
-		String sql = "select * from hms_order where userid='" + id + "'";
 		try {
-			statement = (PreparedStatement) connect.prepareStatement(sql);
+			statement = connect.prepareStatement("select * from order where userid = ?");
+			statement.setString(1, String.valueOf(id));
+			
 			ResultSet rs = statement.executeQuery();
 			int col = rs.getMetaData().getColumnCount();
 			while (rs.next()) {
@@ -179,19 +178,19 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 		configure.finish(connect, statement, result);
 	}
 
-	public static void main(String args[]) throws RemoteException {
-		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
-		o.initOrderDataService();
-		o.insertOrder(new OrderPO(0, 0, 0, OrderStatus.Abnormal, 0, RoomType.KING_SIZE_ROOM, 0,
-				new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
-				new Date(System.currentTimeMillis())));
-		o.findOrder(0);
-		o.insertOrder(new OrderPO(2, 0, 0, OrderStatus.Abnormal, 0, RoomType.KING_SIZE_ROOM, 0,
-				new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
-				new Date(System.currentTimeMillis())));
-		o.findOrderByUserID(0);
-		o.deleteOrder(0);
-		o.deleteOrder(2);
-		o.finishOrderDataService();
-	}
+//	public static void main(String args[]) throws RemoteException {
+//		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
+//		o.initOrderDataService();
+//		o.insertOrder(new OrderPO(0, 0, 0, OrderStatus.Abnormal, 0, RoomType.KING_SIZE_ROOM, 0,
+//				new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
+//				new Date(System.currentTimeMillis())));
+//		o.findOrder(0);
+//		o.insertOrder(new OrderPO(2, 0, 0, OrderStatus.Abnormal, 0, RoomType.KING_SIZE_ROOM, 0,
+//				new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
+//				new Date(System.currentTimeMillis())));
+//		o.findOrderByUserID(0);
+//		o.deleteOrder(0);
+//		o.deleteOrder(2);
+//		o.finishOrderDataService();
+//	}
 }

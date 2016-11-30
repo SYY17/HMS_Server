@@ -2,9 +2,11 @@ package data.userdata;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import data.configuration.ConfigurationServiceMySqlImpl;
@@ -35,10 +37,31 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 			//为防止重复插入信息应进行检查
 			if(findUser(upo.getName()) != null) return;
 			
+			//对ID进行加工
+			SimpleDateFormat format = new SimpleDateFormat("MMdd");
+			String head = String.valueOf(upo.getID())+format.format(new Date());
+			int low = Integer.valueOf(head)*1000;
+			int high = low+1000;
+			statement = connect.prepareStatement("select * from user where id > ? and id < ?");
+			statement.setString(1, String.valueOf(low));
+			statement.setString(2, String.valueOf(high));
+			
+			result = statement.executeQuery();
+			int total = 999;
+			int[] nums = new int[total];
+			int length = 0;
+			while( result.next()){
+				nums[length] = result.getInt(1)%1000;
+				length++;
+			}
+			
+			int next = findMax(nums, length)+1;
+			next = next+low;
+			
 			//列：id; username; password
 			statement = connect.prepareStatement("insert into user values(?, ?, ?)");
 			
-			statement.setString(1, String.valueOf(upo.getID()));
+			statement.setString(1, String.valueOf(next));
 			statement.setString(2, upo.getName());
 			statement.setString(3, upo.getPassword());
 			
@@ -184,6 +207,15 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	private int findMax(int[] nums, int length){
+		if(length == 0) return 0;
+		int max = nums[0];
+		for(int i = 0; i<length; i++){
+			if(nums[i]>max) max = nums[i];
+		}
+		return max;
 	}
 	
 }
