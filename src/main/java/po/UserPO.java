@@ -21,7 +21,7 @@ public class UserPO implements Serializable{//can we add a Userole just like the
 		name=n;
 		password=p;
 	}
-	
+
 	public String getName(){
 		return name;
 	}
@@ -33,6 +33,7 @@ public class UserPO implements Serializable{//can we add a Userole just like the
 	public String getPassword(){
 		return password;
 	}
+	
 }
 
 class CustomerPO extends UserPO{
