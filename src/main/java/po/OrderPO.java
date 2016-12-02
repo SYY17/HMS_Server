@@ -2,6 +2,7 @@ package po;
 
 import java.io.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class OrderPO implements Serializable {
 	/**
@@ -15,11 +16,11 @@ public class OrderPO implements Serializable {
 	int price;
 	RoomType roomType;
 	int roomNumber;
-	Date setTime;
+	Timestamp setTime;
 	Date checkIn;
 	Date checkOut;
 
-	public OrderPO(int orderid, int i, int hID, OrderStatus orderstatus, int pr, RoomType rT, int rn, Date s,
+	public OrderPO(int orderid, int i, int hID, OrderStatus orderstatus, int pr, RoomType rT, int rn, Timestamp s,
 			Date ci, Date co) {
 		orderID = orderid;
 		orderStatus = orderstatus;
@@ -69,7 +70,7 @@ public class OrderPO implements Serializable {
 	 * 
 	 * @return 获得订单对应下单时间
 	 */
-	public Date getSetTime() {
+	public Timestamp getSetTime() {
 		return setTime;
 	}
 

@@ -132,7 +132,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 					//待修改，可以抽象出一个将各参数转换为PO对象的方法
 					OrderPO po = new OrderPO(result.getInt(1), result.getInt(2), result.getInt(3),
 							OrderStatus.valueOf(result.getString(4)), result.getInt(5), RoomType.valueOf(result.getString(6)),
-							result.getInt(7), result.getDate(8), result.getDate(9), result.getDate(10));
+							result.getInt(7), result.getTimestamp(8), result.getDate(9), result.getDate(10));
 					return po;
 				}
 			}
@@ -169,7 +169,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 					//待修改，可以抽象出一个将各参数转换为PO对象的方法
 					OrderPO po = new OrderPO(result.getInt(1), result.getInt(2), result.getInt(3),
 							OrderStatus.valueOf(result.getString(4)), result.getInt(5), RoomType.valueOf(result.getString(6)),
-							result.getInt(7), result.getDate(8), result.getDate(9), result.getDate(10));
+							result.getInt(7), result.getTimestamp(8), result.getDate(9), result.getDate(10));
 					list.add(po);
 				}
 			}
