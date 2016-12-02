@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.promotiondataservice.PromotionDataService;
@@ -222,7 +222,8 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 	
 	private Date parse(String s) throws ParseException{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		return format.parse(s);
+		java.util.Date time = format.parse(s);
+		return new Date(time.getTime());
 	}
 
 }

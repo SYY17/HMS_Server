@@ -2,7 +2,6 @@ package po;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 
 public class UserCreditHistoryPO implements Serializable{
 
@@ -11,24 +10,13 @@ public class UserCreditHistoryPO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	int userId;
-	ArrayList<Date> time;
-	ArrayList<String> history;
+	Date time;
+	int change;
 	
-	public UserCreditHistoryPO(int userId){
+	public UserCreditHistoryPO(int userId, int change, Date time){
 		this.userId=userId;
-		time = new ArrayList<Date>();
-		history = new ArrayList<String>();
-	}
-	
-	public void addHistory(Date timePoint, String content){
-		 if(time==null){
-			 time=new ArrayList<Date>();
-		 }
-		 if(history==null){
-			 history=new ArrayList<String>();
-		 }
-		 time.add(timePoint);
-		 history.add(content);
+		this.time = time;
+		this.change = change;
 	}
 
 	/**
@@ -43,7 +31,7 @@ public class UserCreditHistoryPO implements Serializable{
 	 * 
 	 * @return 获得信用值更改时间
 	 */
-	public ArrayList<Date> getTime(){
+	public Date getTime(){
 		return time;
 	}
 	
@@ -51,8 +39,8 @@ public class UserCreditHistoryPO implements Serializable{
 	 * 
 	 * @return 获得信用值更改细节
 	 */
-	public ArrayList<String> getContent(){
-		return history;
+	public int getChange(){
+		return change;
 	}
 	
 }

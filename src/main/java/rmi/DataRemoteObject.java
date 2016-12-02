@@ -3,7 +3,7 @@ package rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import data.creditdata.CreditDataServiceMySqlImpl;
 import data.datafactory.DataFactoryServiceMySqlImpl;

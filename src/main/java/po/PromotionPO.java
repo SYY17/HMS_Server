@@ -1,7 +1,7 @@
 package po;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class PromotionPO implements Serializable{
 	/**
@@ -9,7 +9,7 @@ public class PromotionPO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	String content = "";
-	Date start = null;
+	Date start = Date.valueOf("2016-12-01");
 	int id = 0;
 	
 	public PromotionPO(String ctt, Date s, int i){

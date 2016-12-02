@@ -3,7 +3,7 @@ package dataservice.promotiondataservice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import po.PromotionPO;
 
 public interface PromotionDataService extends Remote{
