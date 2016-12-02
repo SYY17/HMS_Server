@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.roomdataservice.RoomDataService;
@@ -201,6 +202,47 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 
 	/**
 	 * 
+	 */
+	@Override
+	public ArrayList<RoomPO> findRooms(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		try {
+			//列：id, workername, hotelname, businessarea, address
+			//star, phone, roomtype, roomnumber, description, rate
+			
+			statement = connect.prepareStatement("select * from room");
+			result = statement.executeQuery(); 
+			
+			RoomType roomtype = null;
+			int totalSum = -1;
+			int remainSum = -1;
+			int price = -1;
+			
+			ArrayList<RoomPO> rpoList = new ArrayList<RoomPO>();
+			
+			while(result.next()){
+				id = Integer.valueOf(result.getString(1));
+				roomtype = RoomType.valueOf(result.getString(2));
+				totalSum =  Integer.valueOf(result.getString(3));
+				remainSum =  Integer.valueOf(result.getString(4));
+				price =  Integer.valueOf(result.getString(5));
+				
+				RoomPO rpo = new RoomPO(id, roomtype, totalSum, remainSum, price);
+				rpoList.add(rpo);
+			}
+			
+			if(id != -1){
+				return rpoList;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 
 	 * @throws RemoteException
 	 */
 	@Override
@@ -218,5 +260,5 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 		// TODO Auto-generated method stub
 		configure.finish(connect, statement, result);
 	}
-	
+
 }

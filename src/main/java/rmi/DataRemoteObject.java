@@ -254,6 +254,16 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 		// TODO Auto-generated method stub
 		roomDataService.updateTotalSum(id, type, total);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.roomdataservice.RoomDataService#findRooms(int)
+	 */
+	@Override
+	public ArrayList<RoomPO> findRooms(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -419,6 +429,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 	 */
 	@Override
 	public ArrayList<OrderPO> findOrderByUserID(int id) throws RemoteException{
+		// TODO Auto-generated method stub
 		return orderDataService.findOrderByUserID(id);
 	}
 
