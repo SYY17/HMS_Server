@@ -7,10 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.orderdataservice.OrderDataService;
 import po.OrderPO;
@@ -185,7 +182,6 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 //	public static void main(String args[]) throws RemoteException {
 //		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
 //		o.initOrderDataService();
-<<<<<<< HEAD
 //		o.insertOrder(new OrderPO(0, 0, 0, OrderStatus.Abnormal, 0, RoomType.KING_SIZE_ROOM, 0,
 //				new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
 //				new Date(System.currentTimeMillis())));
@@ -196,9 +192,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 //		o.findOrderByUserID(0);
 //		o.deleteOrder(0);
 //		o.deleteOrder(2);
-=======
 //		o.findOrderByUserID(20905098);
->>>>>>> origin/master
 //		o.finishOrderDataService();
 //	}
 }
