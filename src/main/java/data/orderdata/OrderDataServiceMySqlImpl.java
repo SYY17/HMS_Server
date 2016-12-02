@@ -21,6 +21,8 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	ResultSet result;
 	ConfigurationServiceMySqlImpl configure;
 
+	//类中有待修改的语句
+	
 	public OrderDataServiceMySqlImpl() {
 		// TODO Auto-generated constructor stub
 		configure = new ConfigurationServiceMySqlImpl();
@@ -34,9 +36,8 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public void insertOrder(OrderPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "insert into order  values(?,?,?,?,?,?,?,?,?,?)";
 		try {
-			statement = (PreparedStatement) connect.prepareStatement(sql);
+			statement = connect.prepareStatement("insert into hms_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			statement.setInt(1, po.getOrderID());
 			statement.setInt(2, po.getUserID());
 			statement.setInt(3, po.getHotelID());
@@ -48,8 +49,9 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 			statement.setTimestamp(9, new Timestamp(po.getCheckIn().getTime()));
 			statement.setTimestamp(10, new Timestamp(po.getCheckOut().getTime()));
 			int i = statement.executeUpdate();
+			
+			//print, 待删除
 			System.out.println("Insert result: " + i);
-			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,12 +65,15 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public void deleteOrder(int id) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "delete from order where orderid='" + id + "'";
 		try {
-			statement = (PreparedStatement) connect.prepareStatement(sql);
+			statement = connect.prepareStatement("delete from hms_order where orderid = ?");
+			
+			statement.setInt(1, id);
+			
 			int i = statement.executeUpdate();
+			
+			//print, 待删除
 			System.out.println("Delete result: " + i);
-			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,10 +87,15 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public void updateOrder(int id, OrderStatus status) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "update order set orderstatus='" + status + "' where orderid='" + id + "'";
 		try {
-			statement = (PreparedStatement) connect.prepareStatement(sql);
+			statement =connect.prepareStatement("update hms_order set orderstatus = ? where orderid = ?");
+			
+			statement.setString(1, String.valueOf(status));
+			statement.setInt(2, id);
+			
 			int i = statement.executeUpdate();
+			
+			//print, 待删除
 			System.out.println("Update result: " + i);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,21 +111,28 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public OrderPO findOrder(int id) throws RemoteException {
 		// TODO Auto-generated method stub
-		String sql = "select * from order where orderid='" + id + "'";
 		try {
-			statement = (PreparedStatement) connect.prepareStatement(sql);
-			ResultSet rs = statement.executeQuery();
-			int col = rs.getMetaData().getColumnCount();
-			while (rs.next()) {
-				if (rs.getInt(1) == id) {
+			statement = connect.prepareCall("select * from hms_order where orderid = ?");
+			
+			statement.setInt(1, id);
+			
+			result = statement.executeQuery();
+			
+			//建议在代码中明确数据库中的列数以及顺序
+			int col = result.getMetaData().getColumnCount();
+			while (result.next()) {
+				if (result.getInt(1) == id) {
 					for (int i = 1; i <= col; i++) {
-						System.out.print(rs.getString(i) + "\t");
+						//print, 待删除
+						System.out.print(result.getString(i) + "\t");
 					}
+					//print, 待删除
 					System.out.println("");
-					OrderPO po = new OrderPO(rs.getInt(1), rs.getInt(2), rs.getInt(3),
-							OrderStatus.valueOf(rs.getString(4)), rs.getInt(5), RoomType.valueOf(rs.getString(6)),
-							rs.getInt(7), rs.getDate(8), rs.getDate(9), rs.getDate(10));
-					statement.close();
+					
+					//待修改，可以抽象出一个将各参数转换为PO对象的方法
+					OrderPO po = new OrderPO(result.getInt(1), result.getInt(2), result.getInt(3),
+							OrderStatus.valueOf(result.getString(4)), result.getInt(5), RoomType.valueOf(result.getString(6)),
+							result.getInt(7), result.getDate(8), result.getDate(9), result.getDate(10));
 					return po;
 				}
 			}
@@ -135,24 +152,27 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 		// TODO finish the method
 		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
 		try {
-			statement = connect.prepareStatement("select * from order where userid = ?");
-			statement.setString(1, String.valueOf(id));
+			statement = connect.prepareStatement("select * from hms_order where userid = ?");
+			statement.setInt(1, id);
 			
-			ResultSet rs = statement.executeQuery();
-			int col = rs.getMetaData().getColumnCount();
-			while (rs.next()) {
-				if (rs.getInt(2) == id) {
+			result = statement.executeQuery();
+			int col = result.getMetaData().getColumnCount();
+			while (result.next()) {
+				if (result.getInt(2) == id) {
 					for (int i = 1; i <= col; i++) {
-						System.out.print(rs.getString(i) + "\t");
+						//print, 待删除
+						System.out.print(result.getString(i) + "\t");
 					}
+					//print, 待删除
 					System.out.println("");
-					OrderPO po = new OrderPO(rs.getInt(1), rs.getInt(2), rs.getInt(3),
-							OrderStatus.valueOf(rs.getString(4)), rs.getInt(5), RoomType.valueOf(rs.getString(6)),
-							rs.getInt(7), rs.getDate(8), rs.getDate(9), rs.getDate(10));
+					
+					//待修改，可以抽象出一个将各参数转换为PO对象的方法
+					OrderPO po = new OrderPO(result.getInt(1), result.getInt(2), result.getInt(3),
+							OrderStatus.valueOf(result.getString(4)), result.getInt(5), RoomType.valueOf(result.getString(6)),
+							result.getInt(7), result.getDate(8), result.getDate(9), result.getDate(10));
 					list.add(po);
 				}
 			}
-			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
