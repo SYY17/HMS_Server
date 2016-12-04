@@ -28,9 +28,9 @@ import po.RoomPO;
 import po.RoomType;
 import po.UserPO;
 
-public class DataRemoteObject extends UnicastRemoteObject implements CreditDataService, HotelDataService, 
-OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFactoryService{
-	
+public class DataRemoteObject extends UnicastRemoteObject implements CreditDataService, HotelDataService,
+		OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFactoryService {
+
 	/**
 	 * 
 	 */
@@ -42,7 +42,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 	private RoomDataService roomDataService;
 	private UserDataService userDataService;
 	private DataFactoryService dataFactoryService;
-	
+
 	protected DataRemoteObject() throws RemoteException {
 		creditDataService = new CreditDataServiceMySqlImpl();
 		hotelDataService = new HotelDataServiceMySqlImpl();
@@ -54,11 +54,11 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 	}
 
 	/**
-	 * DataFactoryService
-	 * 以下为数据工厂服务的通信实现
+	 * DataFactoryService 以下为数据工厂服务的通信实现
 	 */
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.datafactoryservice.DataFactoryService#getUserData()
 	 */
 	@Override
@@ -69,6 +69,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.datafactoryservice.DataFactoryService#getOrderData()
 	 */
 	@Override
@@ -79,6 +80,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.datafactoryservice.DataFactoryService#getHotelData()
 	 */
 	@Override
@@ -89,6 +91,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.datafactoryservice.DataFactoryService#getPromotionData()
 	 */
 	@Override
@@ -99,6 +102,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.datafactoryservice.DataFactoryService#getCreditData()
 	 */
 	@Override
@@ -109,6 +113,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.datafactoryservice.DataFactoryService#getRoomData()
 	 */
 	@Override
@@ -116,13 +121,13 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 		// TODO Auto-generated method stub
 		return dataFactoryService.getRoomData();
 	}
-	
+
 	/**
-	 * UserDataService
-	 * 以下为用户数据信息服务的通信实现
+	 * UserDataService 以下为用户数据信息服务的通信实现
 	 */
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.userdataservice.UserDataService#insertUser(po.UserPO)
 	 */
 	@Override
@@ -133,6 +138,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.userdataservice.UserDataService#deleteUser(int)
 	 */
 	@Override
@@ -143,6 +149,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.userdataservice.UserDataService#updateUser(po.UserPO)
 	 */
 	@Override
@@ -150,10 +157,12 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 		// TODO Auto-generated method stub
 		userDataService.updateUser(upo);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.userdataservice.UserDataService#findUser(java.lang.String)
+	 * 
+	 * @see
+	 * dataservice.userdataservice.UserDataService#findUser(java.lang.String)
 	 */
 	@Override
 	public UserPO findUser(String username) throws RemoteException {
@@ -163,6 +172,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.userdataservice.UserDataService#findAll()
 	 */
 	@Override
@@ -170,9 +180,10 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 		// TODO Auto-generated method stub
 		return userDataService.findAll();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.userdataservice.UserDataService#initUserDataService()
 	 */
 	@Override
@@ -183,6 +194,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.userdataservice.UserDataService#finishUserDataService()
 	 */
 	@Override
@@ -192,11 +204,11 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 	}
 
 	/**
-	 * RoomDataService
-	 * 以下为房间数据信息服务的通信实现
+	 * RoomDataService 以下为房间数据信息服务的通信实现
 	 */
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.roomdataservice.RoomDataService#insertRoom(po.RoomPO)
 	 */
 	@Override
@@ -207,6 +219,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.roomdataservice.RoomDataService#deleteAllRooms(int)
 	 */
 	@Override
@@ -217,7 +230,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.roomdataservice.RoomDataService#deleteRoom(int, po.RoomType)
+	 * 
+	 * @see dataservice.roomdataservice.RoomDataService#deleteRoom(int,
+	 * po.RoomType)
 	 */
 	@Override
 	public void deleteRoom(int id, RoomType type) throws RemoteException {
@@ -227,7 +242,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.roomdataservice.RoomDataService#updatePrice(int, po.RoomType, int)
+	 * 
+	 * @see dataservice.roomdataservice.RoomDataService#updatePrice(int,
+	 * po.RoomType, int)
 	 */
 	@Override
 	public void updatePrice(int id, RoomType type, int price) throws RemoteException {
@@ -237,7 +254,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.roomdataservice.RoomDataService#updateRemainSum(int, po.RoomType, int)
+	 * 
+	 * @see dataservice.roomdataservice.RoomDataService#updateRemainSum(int,
+	 * po.RoomType, int)
 	 */
 	@Override
 	public void updateRemainSum(int id, RoomType type, int remain) throws RemoteException {
@@ -247,7 +266,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.roomdataservice.RoomDataService#updateTotalSum(int, po.RoomType, int)
+	 * 
+	 * @see dataservice.roomdataservice.RoomDataService#updateTotalSum(int,
+	 * po.RoomType, int)
 	 */
 	@Override
 	public void updateTotalSum(int id, RoomType type, int total) throws RemoteException {
@@ -267,16 +288,19 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.roomdataservice.RoomDataService#findRoom(int, po.RoomType)
+	 * 
+	 * @see dataservice.roomdataservice.RoomDataService#findRoom(int,
+	 * po.RoomType)
 	 */
 	@Override
 	public RoomPO findRoom(int id, RoomType type) throws RemoteException {
 		// TODO Auto-generated method stub
 		return roomDataService.findRoom(id, type);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.roomdataservice.RoomDataService#initRoomDataService()
 	 */
 	@Override
@@ -287,6 +311,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.roomdataservice.RoomDataService#finishRoomDataService()
 	 */
 	@Override
@@ -296,12 +321,14 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 	}
 
 	/**
-	 * PromotionDataService
-	 * 以下为营销策略数据信息服务的通信实现
+	 * PromotionDataService 以下为营销策略数据信息服务的通信实现
 	 */
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#findsPromotion(int, java.lang.String, java.util.Date)
+	 * 
+	 * @see
+	 * dataservice.promotiondataservice.PromotionDataService#findsPromotion(int,
+	 * java.lang.String, java.util.Date)
 	 */
 	@Override
 	public ArrayList<PromotionPO> findsPromotion(int id, String content, Date start) throws RemoteException {
@@ -311,7 +338,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#findsPromotion(int)
+	 * 
+	 * @see
+	 * dataservice.promotiondataservice.PromotionDataService#findsPromotion(int)
 	 */
 	@Override
 	public ArrayList<PromotionPO> findsPromotion(int id) throws RemoteException {
@@ -321,7 +350,10 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#findsPromotion(int, java.util.Date)
+	 * 
+	 * @see
+	 * dataservice.promotiondataservice.PromotionDataService#findsPromotion(int,
+	 * java.util.Date)
 	 */
 	@Override
 	public ArrayList<PromotionPO> findsPromotion(int id, Date start) throws RemoteException {
@@ -331,7 +363,10 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#findsPromotion(int, java.lang.String)
+	 * 
+	 * @see
+	 * dataservice.promotiondataservice.PromotionDataService#findsPromotion(int,
+	 * java.lang.String)
 	 */
 	@Override
 	public ArrayList<PromotionPO> findsPromotion(int id, String content) throws RemoteException {
@@ -341,7 +376,10 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#insertPromotion(po.PromotionPO)
+	 * 
+	 * @see
+	 * dataservice.promotiondataservice.PromotionDataService#insertPromotion(po.
+	 * PromotionPO)
 	 */
 	@Override
 	public void insertPromotion(PromotionPO ppo) throws RemoteException {
@@ -351,17 +389,22 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#deletePromotion(po.PromotionPO)
+	 * 
+	 * @see
+	 * dataservice.promotiondataservice.PromotionDataService#deletePromotion(po.
+	 * PromotionPO)
 	 */
 	@Override
 	public void deletePromotion(PromotionPO ppo) throws RemoteException {
 		// TODO Auto-generated method stub
 		promotionDataService.deletePromotion(ppo);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#initPromotionDataService()
+	 * 
+	 * @see dataservice.promotiondataservice.PromotionDataService#
+	 * initPromotionDataService()
 	 */
 	@Override
 	public void initPromotionDataService() throws RemoteException {
@@ -371,7 +414,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.promotiondataservice.PromotionDataService#finishPromotionDataService()
+	 * 
+	 * @see dataservice.promotiondataservice.PromotionDataService#
+	 * finishPromotionDataService()
 	 */
 	@Override
 	public void finishPromotionDataService() throws RemoteException {
@@ -380,12 +425,13 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 	}
 
 	/**
-	 * OrderDataService
-	 * 以下为订单数据信息服务的通信实现
+	 * OrderDataService 以下为订单数据信息服务的通信实现
 	 */
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.orderdataservice.OrderDataService#insertOrder(po.OrderPO)
+	 * 
+	 * @see
+	 * dataservice.orderdataservice.OrderDataService#insertOrder(po.OrderPO)
 	 */
 	@Override
 	public void insertOrder(OrderPO po) throws RemoteException {
@@ -395,6 +441,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.orderdataservice.OrderDataService#deleteOrder(int)
 	 */
 	@Override
@@ -405,7 +452,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.orderdataservice.OrderDataService#updateOrder(int, po.OrderStatus)
+	 * 
+	 * @see dataservice.orderdataservice.OrderDataService#updateOrder(int,
+	 * po.OrderStatus)
 	 */
 	@Override
 	public void updateOrder(int id, OrderStatus status) throws RemoteException {
@@ -415,6 +464,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.orderdataservice.OrderDataService#findOrder(int)
 	 */
 	@Override
@@ -422,19 +472,32 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 		// TODO Auto-generated method stub
 		return orderDataService.findOrder(id);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.orderdataservice.OrderDataService#findOrderByUserID(int)
+	 * 
+	 * @see
+	 * dataservice.orderdataservice.OrderDataService#findOrderByUserName(String)
 	 */
 	@Override
-	public ArrayList<OrderPO> findOrderByUserID(int id) throws RemoteException{
-		// TODO Auto-generated method stub
-		return orderDataService.findOrderByUserID(id);
+	public ArrayList<OrderPO> findOrderByUserName(String userName) throws RemoteException {
+		return orderDataService.findOrderByUserName(userName);
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see dataservice.orderdataservice.OrderDataService#findOrderByHotelName(
+	 * String)
+	 */
+	@Override
+	public ArrayList<OrderPO> findOrderByHotelName(String hotelName) throws RemoteException {
+		return orderDataService.findOrderByUserName(hotelName);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.orderdataservice.OrderDataService#initOrderDataService()
 	 */
 	@Override
@@ -445,20 +508,22 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.orderdataservice.OrderDataService#finishOrderDataService()
+	 * 
+	 * @see
+	 * dataservice.orderdataservice.OrderDataService#finishOrderDataService()
 	 */
 	@Override
 	public void finishOrderDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		orderDataService.finishOrderDataService();
 	}
-	
+
 	/**
-	 * HotelDataService
-	 * 以下为酒店数据信息服务的通信实现
+	 * HotelDataService 以下为酒店数据信息服务的通信实现
 	 */
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.hoteldataservice.HotelDataService#deleteHotel(int)
 	 */
 	@Override
@@ -469,7 +534,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.hoteldataservice.HotelDataService#insertHotel(po.HotelPO)
+	 * 
+	 * @see
+	 * dataservice.hoteldataservice.HotelDataService#insertHotel(po.HotelPO)
 	 */
 	@Override
 	public void insertHotel(HotelPO hpo) throws RemoteException {
@@ -479,7 +546,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.hoteldataservice.HotelDataService#updateHotel(po.HotelPO)
+	 * 
+	 * @see
+	 * dataservice.hoteldataservice.HotelDataService#updateHotel(po.HotelPO)
 	 */
 	@Override
 	public void updateHotel(HotelPO hpo) throws RemoteException {
@@ -489,7 +558,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.hoteldataservice.HotelDataService#findHotel(java.lang.String)
+	 * 
+	 * @see
+	 * dataservice.hoteldataservice.HotelDataService#findHotel(java.lang.String)
 	 */
 	@Override
 	public HotelPO findHotel(String name) throws RemoteException {
@@ -499,7 +570,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.hoteldataservice.HotelDataService#findsHotel(java.lang.String, java.lang.String)
+	 * 
+	 * @see dataservice.hoteldataservice.HotelDataService#findsHotel(java.lang.
+	 * String, java.lang.String)
 	 */
 	@Override
 	public ArrayList<HotelPO> findsHotel(String field, String value) throws RemoteException {
@@ -509,6 +582,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.hoteldataservice.HotelDataService#findsHotel()
 	 */
 	@Override
@@ -516,9 +590,10 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 		// TODO Auto-generated method stub
 		return hotelDataService.findsHotel();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.hoteldataservice.HotelDataService#initHotelDataService()
 	 */
 	@Override
@@ -529,7 +604,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.hoteldataservice.HotelDataService#finishHotelDataService()
+	 * 
+	 * @see
+	 * dataservice.hoteldataservice.HotelDataService#finishHotelDataService()
 	 */
 	@Override
 	public void finishHotelDataService() throws RemoteException {
@@ -538,12 +615,13 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 	}
 
 	/**
-	 * CreditDataService
-	 * 以下为信用值数据信息服务的通信实现
+	 * CreditDataService 以下为信用值数据信息服务的通信实现
 	 */
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.creditdataservice.CreditDataService#insertCredit(po.CreditPO)
+	 * 
+	 * @see
+	 * dataservice.creditdataservice.CreditDataService#insertCredit(po.CreditPO)
 	 */
 	@Override
 	public void insertCredit(CreditPO cpo) throws RemoteException {
@@ -553,6 +631,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.creditdataservice.CreditDataService#deleteCredit(int)
 	 */
 	@Override
@@ -563,7 +642,9 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
-	 * @see dataservice.creditdataservice.CreditDataService#updateCredit(po.CreditPO)
+	 * 
+	 * @see
+	 * dataservice.creditdataservice.CreditDataService#updateCredit(po.CreditPO)
 	 */
 	@Override
 	public void updateCredit(CreditPO cpo) throws RemoteException {
@@ -573,6 +654,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.creditdataservice.CreditDataService#findCredit(int)
 	 */
 	@Override
@@ -583,6 +665,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.creditdataservice.CreditDataService#init()
 	 */
 	@Override
@@ -593,6 +676,7 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.creditdataservice.CreditDataService#finish()
 	 */
 	@Override
@@ -600,5 +684,5 @@ OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFa
 		// TODO Auto-generated method stub
 		creditDataService.finishCreditDataService();
 	}
-	
+
 }

@@ -40,11 +40,19 @@ public interface OrderDataService extends Remote{
 	
 	/**
 	 * 
-	 * @param id
+	 * @param userName
 	 * @return
 	 * @throws RemoteException
 	 */
-	public ArrayList<OrderPO> findOrderByUserID(int id) throws RemoteException;
+	public ArrayList<OrderPO> findOrderByUserName(String userName) throws RemoteException;
+	
+	/**
+	 * 
+	 * @param hotelName
+	 * @return
+	 * @throws RemoteException
+	 */
+	public ArrayList<OrderPO> findOrderByHotelName(String hotelName) throws RemoteException;
 
 	/**
 	 * 
