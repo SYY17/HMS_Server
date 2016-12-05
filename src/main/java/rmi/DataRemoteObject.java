@@ -169,6 +169,16 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		// TODO Auto-generated method stub
 		return userDataService.findUser(username);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.userdataservice.UserDataService#findUser(int)
+	 */
+	@Override
+	public String findUser(int id) throws RemoteException{
+		// TODO Auto-generated method stub
+		return userDataService.findUser(id);
+	}
 
 	/*
 	 * (non-Javadoc)

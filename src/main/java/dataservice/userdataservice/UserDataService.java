@@ -31,11 +31,19 @@ public interface UserDataService extends Remote{
 	
 	/**
 	 * 
-	 * @param id
-	 * @return 根据ID查找并返回用户信息
+	 * @param username
+	 * @return 根据用户名查找并返回用户信息
 	 * @throws RemoteException
 	 */
 	public UserPO findUser(String username) throws RemoteException;
+	
+	/**
+	 * 
+	 * @param id
+	 * @return 根据ID查找并返回用户名
+	 * @throws RemoteException
+	 */
+	public String findUser(int id) throws RemoteException;
 	
 	/**
 	 * 

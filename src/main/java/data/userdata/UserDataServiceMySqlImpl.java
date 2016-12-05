@@ -61,7 +61,7 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 			//列：id; username; password
 			statement = connect.prepareStatement("insert into user values(?, ?, ?)");
 			
-			statement.setString(1, String.valueOf(next));
+			statement.setInt(1, next);
 			statement.setString(2, upo.getName());
 			statement.setString(3, upo.getPassword());
 			
@@ -84,7 +84,7 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 		try {
 			//列：id; username; password
 			statement = connect.prepareStatement("delete from user where id = ?");
-			statement.setString(1, String.valueOf(id));
+			statement.setInt(1, id);
 			
 			statement.execute();
 		} catch (SQLException e) {
@@ -104,10 +104,10 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 		try {
 			//列：id; username; password
 			statement = connect.prepareStatement("update user set id = ?, username = ?, password = ? where id = ?");
-			statement.setString(1, String.valueOf(upo.getID()));
+			statement.setInt(1, upo.getID());
 			statement.setString(2, upo.getName());
 			statement.setString(3, upo.getPassword());
-			statement.setString(4, String.valueOf(upo.getID()));
+			statement.setInt(4, upo.getID());
 			
 			statement.execute();
 		} catch (SQLException e) {
@@ -118,8 +118,8 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 
 	/**
 	 * 
-	 * @param id
-	 * @return 根据ID查找并返回用户信息
+	 * @param username
+	 * @return 根据用户名查找并返回用户信息
 	 * @throws RemoteException
 	 */
 	@Override
@@ -139,7 +139,7 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 			
 			//遍历result
 			while(result.next()){
-				id = Integer.valueOf(result.getString(1));
+				id = result.getInt(1);
 				password = result.getString(3);
 			}
 			
@@ -152,6 +152,34 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return 根据ID查找并返回用户名
+	 * @throws RemoteException
+	 */
+	public String findUser(int id) throws RemoteException{
+		// TODO Auto-generated method stub
+		String username = null;
+		
+		try {
+			statement = connect.prepareStatement("select * from user where id = ?");
+			statement.setInt(1, id);
+			
+			result = statement.executeQuery();
+			
+			//列：id; username; password
+			while(result.next()){
+				username = result.getString(2);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return username;
 	}
 
 	/**
