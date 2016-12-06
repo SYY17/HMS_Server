@@ -18,30 +18,37 @@ public interface OrderDataService extends Remote{
 
 	/**
 	 * 
-	 * @param po
+	 * @param id
 	 * @throws RemoteException
 	 */
 	public void deleteOrder(int id) throws RemoteException;
 
 	/**
 	 * 
-	 * @param po
+	 * @param id,status
 	 * @throws RemoteException
 	 */
 	public void updateOrder(int id, OrderStatus status) throws RemoteException;
 
 	/**
 	 * 
-	 * @param id
-	 * @return
+	 * @return Arraylist<OrderPO>
 	 * @throws RemoteException
 	 */
-	public OrderPO findOrder(int id) throws RemoteException;
+	public ArrayList<OrderPO> findOrder() throws RemoteException;
+	
+	/**
+	 * 
+	 * @param id
+	 * @return OrderPO
+	 * @throws RemoteException
+	 */
+	public OrderPO findOrderByOrderID(int id) throws RemoteException;
 	
 	/**
 	 * 
 	 * @param userName
-	 * @return
+	 * @return Arraylist<OrderPO>
 	 * @throws RemoteException
 	 */
 	public ArrayList<OrderPO> findOrderByUserName(String userName) throws RemoteException;
@@ -49,7 +56,7 @@ public interface OrderDataService extends Remote{
 	/**
 	 * 
 	 * @param hotelName
-	 * @return
+	 * @return Arraylist<OrderPO>
 	 * @throws RemoteException
 	 */
 	public ArrayList<OrderPO> findOrderByHotelName(String hotelName) throws RemoteException;

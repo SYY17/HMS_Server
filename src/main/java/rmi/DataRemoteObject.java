@@ -169,13 +169,14 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		// TODO Auto-generated method stub
 		return userDataService.findUser(username);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.userdataservice.UserDataService#findUser(int)
 	 */
 	@Override
-	public String findUser(int id) throws RemoteException{
+	public String findUser(int id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return userDataService.findUser(id);
 	}
@@ -285,9 +286,10 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		// TODO Auto-generated method stub
 		roomDataService.updateTotalSum(id, type, total);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see dataservice.roomdataservice.RoomDataService#findRooms(int)
 	 */
 	@Override
@@ -475,12 +477,23 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see dataservice.orderdataservice.OrderDataService#findOrder(int)
+	 * @see dataservice.orderdataservice.OrderDataService#findOrder()
 	 */
 	@Override
-	public OrderPO findOrder(int id) throws RemoteException {
+	public ArrayList<OrderPO> findOrder() throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderDataService.findOrder(id);
+		return orderDataService.findOrder();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dataservice.orderdataservice.OrderDataService#findOrderByOrderID(int)
+	 */
+	@Override
+	public OrderPO findOrderByOrderID(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataService.findOrderByOrderID(id);
 	}
 
 	/*

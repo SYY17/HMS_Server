@@ -92,7 +92,7 @@ public class LoginDataServiceMySqlImpl implements LoginDataService{
 		// TODO Auto-generated method stub
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system?useSSL=false", "root", "");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
