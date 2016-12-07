@@ -7,29 +7,38 @@ import java.sql.Date;
 
 import data.creditdata.CreditDataServiceMySqlImpl;
 import data.datafactory.DataFactoryServiceMySqlImpl;
+import data.discountpromotiondata.DiscountPromotionDataServiceMySqlImpl;
+import data.fullcutpromotiondata.FullCutPromotionDataServiceMySqlImpl;
 import data.hoteldata.HotelDataServiceMySqlImpl;
 import data.orderdata.OrderDataServiceMySqlImpl;
 import data.promotiondata.PromotionDataServiceMySqlImpl;
 import data.roomdata.RoomDataServiceMySqlImpl;
+import data.usercredithistorydata.UserCreditHistoryDataServiceMySqlImpl;
 import data.userdata.UserDataServiceMySqlImpl;
 import dataservice.creditdataservice.CreditDataService;
 import dataservice.datafactoryservice.DataFactoryService;
+import dataservice.discountpromotiondataservice.DiscountPromotionDataService;
+import dataservice.fullcutpromotiondataservice.FullCutPromotionDataService;
 import dataservice.hoteldataservice.HotelDataService;
 import dataservice.orderdataservice.OrderDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.roomdataservice.RoomDataService;
+import dataservice.usercredithistoryservice.UserCreditHistoryDataService;
 import dataservice.userdataservice.UserDataService;
 import po.CreditPO;
+import po.DiscountPromotionPO;
+import po.FullCutPromotionPO;
 import po.HotelPO;
 import po.OrderPO;
 import po.OrderStatus;
 import po.PromotionPO;
 import po.RoomPO;
 import po.RoomType;
+import po.UserCreditHistoryPO;
 import po.UserPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements CreditDataService, HotelDataService,
-		OrderDataService, PromotionDataService, RoomDataService, UserDataService, DataFactoryService {
+		OrderDataService, PromotionDataService, RoomDataService, UserDataService, UserCreditHistoryDataService, FullCutPromotionDataService, DiscountPromotionDataService,DataFactoryService {
 
 	/**
 	 * 
@@ -41,6 +50,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	private PromotionDataService promotionDataService;
 	private RoomDataService roomDataService;
 	private UserDataService userDataService;
+	private UserCreditHistoryDataService userCreditHistoryDataService;
+	private FullCutPromotionDataService fullCutPromotionDataService;
+	private DiscountPromotionDataService discountPromotionDataService;
 	private DataFactoryService dataFactoryService;
 
 	protected DataRemoteObject() throws RemoteException {
@@ -50,6 +62,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		promotionDataService = new PromotionDataServiceMySqlImpl();
 		roomDataService = new RoomDataServiceMySqlImpl();
 		userDataService = new UserDataServiceMySqlImpl();
+		userCreditHistoryDataService = new UserCreditHistoryDataServiceMySqlImpl();
+		fullCutPromotionDataService = new FullCutPromotionDataServiceMySqlImpl();
+		discountPromotionDataService = new DiscountPromotionDataServiceMySqlImpl();
 		dataFactoryService = new DataFactoryServiceMySqlImpl();
 	}
 
@@ -706,6 +721,84 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	public void finishCreditDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		creditDataService.finishCreditDataService();
+	}
+
+	@Override
+	public void insertDiscountPromotion(DiscountPromotionPO dpo) throws RemoteException {
+		// TODO Auto-generated method stub
+		discountPromotionDataService.insertDiscountPromotion(dpo);
+	}
+
+	@Override
+	public void deleteDiscountPromotion(DiscountPromotionPO dpo) throws RemoteException {
+		// TODO Auto-generated method stub
+		discountPromotionDataService.deleteDiscountPromotion(dpo);
+	}
+
+	@Override
+	public void initDiscountPromotionDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		discountPromotionDataService.initDiscountPromotionDataService();
+	}
+
+	@Override
+	public void finishDiscountPromotionDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		discountPromotionDataService.finishDiscountPromotionDataService();
+	}
+
+	@Override
+	public void insertFullCutPromotion(FullCutPromotionPO fpo) throws RemoteException {
+		// TODO Auto-generated method stub
+		fullCutPromotionDataService.insertFullCutPromotion(fpo);
+	}
+
+	@Override
+	public void deleteFullCutPromotion(FullCutPromotionPO fpo) throws RemoteException {
+		// TODO Auto-generated method stub
+		fullCutPromotionDataService.deleteFullCutPromotion(fpo);
+	}
+
+	@Override
+	public void initFullCutPromotionDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		fullCutPromotionDataService.initFullCutPromotionDataService();
+	}
+
+	@Override
+	public void finishFullCutPromotionDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		fullCutPromotionDataService.finishFullCutPromotionDataService();
+	}
+
+	@Override
+	public void updateHistory(UserCreditHistoryPO ucpo) throws RemoteException {
+		// TODO Auto-generated method stub
+		userCreditHistoryDataService.updateHistory(ucpo);
+	}
+
+	@Override
+	public ArrayList<UserCreditHistoryPO> findCreditHistory(int userId) throws RemoteException {
+		// TODO Auto-generated method stub
+		return userCreditHistoryDataService.findCreditHistory(userId);
+	}
+
+	@Override
+	public ArrayList<UserCreditHistoryPO> getAllCreditHistory() throws RemoteException {
+		// TODO Auto-generated method stub
+		return userCreditHistoryDataService.getAllCreditHistory();
+	}
+
+	@Override
+	public void initUserCreditHistoryDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		userCreditHistoryDataService.initUserCreditHistoryDataService();
+	}
+
+	@Override
+	public void finishUserCreditHistoryDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		userCreditHistoryDataService.finishUserCreditHistoryDataService();
 	}
 
 }
