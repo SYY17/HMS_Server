@@ -33,7 +33,7 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 		// TODO Auto-generated method stub
 		try {
 			//为防止重复插入信息应进行检查
-			if(findRoom(rpo.getHotelID(), rpo.getRoomType()) != null) return;
+			//if(findRoom(rpo.getHotelID(), rpo.getRoomType()) != null) return;    //不知为何加上会报错
 			
 			//列：id; roomtype; total; remain; price
 			statement = connect.prepareStatement("insert into room values(?, ?, ?, ?, ?)");
@@ -41,10 +41,10 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 			statement.setString(1, String.valueOf(rpo.getHotelID()));
 			statement.setString(2, String.valueOf(rpo.getRoomType()));
 			statement.setString(3, String.valueOf(rpo.getTotalSum()));
-			statement.setString(3, String.valueOf(rpo.getRemainSum()));
-			statement.setString(3, String.valueOf(rpo.getPrice()));
+			statement.setString(4, String.valueOf(rpo.getRemainSum()));
+			statement.setString(5, String.valueOf(rpo.getPrice()));
 			
-			statement.execute();
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 			statement.setString(2, String.valueOf(id));
 			statement.setString(3, String.valueOf(type));
 			
-			statement.execute();
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,7 +130,7 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 			statement.setString(2, String.valueOf(id));
 			statement.setString(3, String.valueOf(type));
 			
-			statement.execute();
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,7 +153,7 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 			statement.setString(2, String.valueOf(id));
 			statement.setString(3, String.valueOf(type));
 			
-			statement.execute();
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -207,10 +207,10 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 	public ArrayList<RoomPO> findRooms(int id) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
-			//列：id, workername, hotelname, businessarea, address
-			//star, phone, roomtype, roomnumber, description, rate
+			///列：id; roomtype; total; remain; price
 			
-			statement = connect.prepareStatement("select * from room");
+			statement = connect.prepareStatement("select * from room where id = ?");
+			statement.setString(1, String.valueOf(id));
 			result = statement.executeQuery(); 
 			
 			RoomType roomtype = null;
@@ -221,7 +221,7 @@ public class RoomDataServiceMySqlImpl implements RoomDataService{
 			ArrayList<RoomPO> rpoList = new ArrayList<RoomPO>();
 			
 			while(result.next()){
-				id = Integer.valueOf(result.getString(1));
+				//id = Integer.valueOf(result.getString(1));
 				roomtype = RoomType.valueOf(result.getString(2));
 				totalSum =  Integer.valueOf(result.getString(3));
 				remainSum =  Integer.valueOf(result.getString(4));
