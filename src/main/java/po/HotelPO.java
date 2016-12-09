@@ -1,7 +1,6 @@
 package po;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class HotelPO implements Serializable{
 	/**
