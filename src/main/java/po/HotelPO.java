@@ -1,7 +1,6 @@
 package po;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class HotelPO implements Serializable{
 	/**
@@ -14,21 +13,22 @@ public class HotelPO implements Serializable{
 	String businessArea;
 	String hotelDescription;
 	int starLevel;
-	int roomNumber;
-	ArrayList<RoomPO> wholeRooms; 
+//	int roomNumber;
+//	ArrayList<RoomPO> wholeRooms; 
 	double rating;
 	String staffName;
 	String phoneNumber;
 	
-	public HotelPO(int hid,String hn,String ha,String ba,String hd,int sl,int rn,ArrayList<RoomPO> rooms,int r,String sn,String pn){
+	public HotelPO(int hid,String hn,String ha,String ba,String hd,int sl,/*int rn,ArrayList<RoomPO> rooms,*/
+			int r,String sn,String pn){
 		hotelID=hid;
 		hotelName=hn;
 		hotelAddress=ha;
 		businessArea = ba;
 		hotelDescription = hd;
 		starLevel = sl;
-		roomNumber=rn;
-		wholeRooms=rooms;
+//		roomNumber=rn;
+//		wholeRooms=rooms;
 		rating =r;
 		staffName = sn;
 		phoneNumber = pn;
@@ -83,21 +83,21 @@ public class HotelPO implements Serializable{
 		return starLevel;
 	}
 	
-	/**
-	 * 
-	 * @return 获得房间号
-	 */
-	public int getRoomNumber(){
-		return roomNumber;
-	}
-	
-	/**
-	 * 
-	 * @return 获得酒店房间列表
-	 */
-	public ArrayList<RoomPO> getRooms(){
-		return wholeRooms;
-	}
+//	/**
+//	 * 
+//	 * @return 获得房间号
+//	 */
+//	public int getRoomNumber(){
+//		return roomNumber;
+//	}
+//	
+//	/**
+//	 * 
+//	 * @return 获得酒店房间列表
+//	 */
+//	public ArrayList<RoomPO> getRooms(){
+//		return wholeRooms;
+//	}
 	
 	/**
 	 * 

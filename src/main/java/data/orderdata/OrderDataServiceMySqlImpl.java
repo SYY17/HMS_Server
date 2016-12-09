@@ -39,7 +39,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	public void insertOrder(OrderPO po) throws RemoteException {
 		try {
 			statement = connect.prepareStatement("insert into hms_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			
+
 			statement.setInt(1, po.getOrderID());
 			statement.setString(2, po.getUserName());
 			statement.setString(3, po.getHotelName());
@@ -47,10 +47,10 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 			statement.setInt(5, po.getPrice());
 			statement.setString(6, po.getRoomType().toString());
 			statement.setInt(7, po.getRoomNumber());
-			statement.setTimestamp(8, new Timestamp(po.getSetTime().getTime()));
-			statement.setTimestamp(9, new Timestamp(po.getCheckIn().getTime()));
-			statement.setTimestamp(10, new Timestamp(po.getCheckOut().getTime()));
-			
+			statement.setTimestamp(8, po.getSetTime());
+			statement.setDate(9, po.getCheckIn());
+			statement.setDate(10, po.getCheckOut());
+
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,9 +66,9 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	public void deleteOrder(int id) throws RemoteException {
 		try {
 			statement = connect.prepareStatement("delete from hms_order where orderid = ?");
-			
+
 			statement.setInt(1, id);
-			
+
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,21 +150,23 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 			statement.setInt(1, id);
 
 			result = statement.executeQuery();
-
-			for (int i = 1; i <= COL_NUM; i++) {
+			while (result.next()) {
+				for (int i = 1; i <= COL_NUM; i++) {
+					// print, 待删除
+					System.out.print(result.getString(i) + "\t");
+				}
 				// print, 待删除
-				System.out.print(result.getString(i) + "\t");
-			}
-			// print, 待删除
-			System.out.println("");
+				System.out.println("");
 
-			return getOrderPO(result.getInt(1), result.getString(2), result.getString(3),
-					OrderStatus.valueOf(result.getString(4)), result.getInt(5), RoomType.valueOf(result.getString(6)),
-					result.getInt(7), result.getTimestamp(8), result.getDate(9), result.getDate(10));
+				return getOrderPO(result.getInt(1), result.getString(2), result.getString(3),
+						OrderStatus.valueOf(result.getString(4)), result.getInt(5),
+						RoomType.valueOf(result.getString(6)), result.getInt(7), result.getTimestamp(8),
+						result.getDate(9), result.getDate(10));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -191,9 +193,9 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 		ArrayList<OrderPO> list = new ArrayList<OrderPO>();
 		try {
 			statement = connect.prepareStatement(sqlStatement);
-			
+
 			statement.setString(1, name);
-			
+
 			result = statement.executeQuery();
 			while (result.next()) {
 				for (int i = 1; i <= COL_NUM; i++) {
@@ -235,6 +237,11 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	public static void main(String args[]) throws RemoteException {
 		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
 		o.initOrderDataService();
+		 o.insertOrder(new OrderPO(60102931, "庄宇州", "天字一号房",
+		 OrderStatus.Abnormal, 100, RoomType.KING_SIZE_ROOM, 2,
+		 new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0)));
+		o.findOrderByOrderID(60102931);
+//		o.deleteOrder(60102931);
 		o.findOrderByUserName("tom");
 		o.finishOrderDataService();
 	}

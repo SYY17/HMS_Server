@@ -310,7 +310,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	@Override
 	public ArrayList<RoomPO> findRooms(int id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return roomDataService.findRooms(id);
 	}
 
 	/*
