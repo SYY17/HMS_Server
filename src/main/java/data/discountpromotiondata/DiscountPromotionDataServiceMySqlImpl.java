@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.discountpromotiondataservice.DiscountPromotionDataService;
 import po.DiscountPromotionPO;
+import po.PromotionType;
 
 public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionDataService {
 
@@ -29,7 +30,7 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 		// TODO Auto-generated method stub
 		try {
 			//列：id; name; content; start; stop; discount
-			statement = connect.prepareStatement("insert into DISCOUNT values(?, ?, ?, ?, ?, ?)");
+			statement = connect.prepareStatement("insert into discountPromotion values(?, ?, ?, ?, ?, ?)");
 			
 			statement.setString(1, String.valueOf(dpo.getID()));
 			statement.setString(2, String.valueOf(dpo.getPromotionName()));
@@ -50,7 +51,7 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 		// TODO Auto-generated method stub
 		try {
 			//列：id; name; content; start; stop; discount
-			statement = connect.prepareStatement("delete from promotion where start = ? and stop = ? and name = ?");//
+			statement = connect.prepareStatement("delete from discountPromotion where start = ? and stop = ? and name = ?");//
 
 			statement.setString(1, parse(dpo.getStartTime()));
 			statement.setString(2, parse(dpo.getStopTime()));
@@ -79,5 +80,15 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(date);
 	}
-	
+	/*
+	public static void main(String[]args) throws RemoteException{
+		DiscountPromotionDataServiceMySqlImpl p = new DiscountPromotionDataServiceMySqlImpl();
+		p.initDiscountPromotionDataService();
+		
+		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+		p.insertDiscountPromotion(new DiscountPromotionPO("Seventh","SeventhPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+		p.finishDiscountPromotionDataService();
+	}
+	*/
 }

@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.fullcutpromotiondataservice.FullCutPromotionDataService;
 import po.FullCutPromotionPO;
+import po.PromotionType;
 
 public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDataService {
 
@@ -28,7 +29,7 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 		// TODO Auto-generated method stub
 		try {
 			//列：id; name; content; start; stop; every; cut
-			statement = connect.prepareStatement("insert into promotion values(?, ?, ?, ?, ?, ?, ?)");
+			statement = connect.prepareStatement("insert into fullCutPromotion values(?, ?, ?, ?, ?, ?, ?)");
 			
 			statement.setString(1, String.valueOf(fpo.getID()));
 			statement.setString(2, String.valueOf(fpo.getPromotionName()));
@@ -50,7 +51,7 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 		// TODO Auto-generated method stub
 		try {
 			//列：id; name; content; start; stop; every; cut
-			statement = connect.prepareStatement("delete from promotion where start = ? and stop = ? and name = ?");//
+			statement = connect.prepareStatement("delete from fullCutPromotion where start = ? and stop = ? and name = ?");//
 			
 			statement.setString(1, parse(fpo.getStartTime()));
 			statement.setString(2, parse(fpo.getStopTime()));//
@@ -80,4 +81,15 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 		return format.format(date);
 	}
 
+	/*
+	public static void main(String[]args) throws RemoteException{
+		FullCutPromotionDataServiceMySqlImpl p = new FullCutPromotionDataServiceMySqlImpl();
+		p.initFullCutPromotionDataService();
+		
+		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+		p.insertFullCutPromotion(new FullCutPromotionPO("Sixth","SixthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341,200,20));
+		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+		p.finishFullCutPromotionDataService();
+	}
+	*/
 }
