@@ -4,11 +4,22 @@ import rmi.RemoteController;
 
 public class DataServiceServerRunner {
 	
+	RemoteController remoteController;
+	
 	public DataServiceServerRunner() {
-		new RemoteController();
+		// TODO Auto-generated constructor stub
+		remoteController = new RemoteController();
 	}
 	
-	public static void main(String[] args) {
-		new DataServiceServerRunner();
+	public void startRunner(){
+		remoteController = new RemoteController();
 	}
+	
+	public void stopRunner(){
+		remoteController.stopServer();
+	}
+	
+//	public static void main(String[] args) {
+//		new DataServiceServerRunner();
+//	}
 }
