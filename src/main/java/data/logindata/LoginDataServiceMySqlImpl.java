@@ -131,20 +131,20 @@ public class LoginDataServiceMySqlImpl implements LoginDataService{
 		}
 	}
 	
-	public static void main(String[] args) {
-		LoginDataServiceMySqlImpl s = new LoginDataServiceMySqlImpl();
-		try {
-			s.initLoginDataService();
-			s.insertUser("admin", "000000", 10916231);
-			UserPO upo = s.findUser(10916231);
-			System.out.print("id = "+upo.getID());
-			System.out.print("; username = "+upo.getName());
-			System.out.println("; password = "+upo.getPassword());
-			s.finishLoginDataService();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		LoginDataServiceMySqlImpl s = new LoginDataServiceMySqlImpl();
+//		try {
+//			s.initLoginDataService();
+//			s.insertUser("admin", "000000", 10916231);
+//			UserPO upo = s.findUser(10916231);
+//			System.out.print("id = "+upo.getID());
+//			System.out.print("; username = "+upo.getName());
+//			System.out.println("; password = "+upo.getPassword());
+//			s.finishLoginDataService();
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 }
