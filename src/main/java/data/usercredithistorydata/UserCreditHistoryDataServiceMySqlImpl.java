@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 import data.configuration.ConfigurationServiceMySqlImpl;
+import data.creditdata.CreditDataServiceMySqlImpl;
 import dataservice.usercredithistoryservice.UserCreditHistoryDataService;
 import po.UserCreditHistoryPO;
 
@@ -29,7 +30,7 @@ public class UserCreditHistoryDataServiceMySqlImpl implements UserCreditHistoryD
 		// TODO Auto-generated method stub
 		try{
 			//列：id; change; date
-			statement = connect.prepareStatement("insert into UserCreditHistory values(?, ?, ?)");
+			statement = connect.prepareStatement("insert into userCreditHistory values(?, ?, ?)");
 			
 			statement.setString(1, String.valueOf(ucpo.getUserId()));
 			statement.setString(2, String.valueOf(ucpo.getChange()));
@@ -48,7 +49,7 @@ public class UserCreditHistoryDataServiceMySqlImpl implements UserCreditHistoryD
 		ArrayList<UserCreditHistoryPO> list = new ArrayList<UserCreditHistoryPO>();
 		 
 		try{
-			statement = connect.prepareStatement("select * from UserCreditHistory where id = ?");
+			statement = connect.prepareStatement("select * from userCreditHistory where id = ?");
 			
 			//列：id; change; date
 			statement.setString(1, String.valueOf(userId));
@@ -76,7 +77,7 @@ public class UserCreditHistoryDataServiceMySqlImpl implements UserCreditHistoryD
 		ArrayList<UserCreditHistoryPO> list = new ArrayList<UserCreditHistoryPO>();
 		 
 		try{
-			statement = connect.prepareStatement("select * from UserCreditHistory");
+			statement = connect.prepareStatement("select * from userCreditHistory");
 			
 			//列：id; change; date
 			result = statement.executeQuery();
@@ -109,6 +110,16 @@ public class UserCreditHistoryDataServiceMySqlImpl implements UserCreditHistoryD
 		// TODO Auto-generated method stub
 		configure.finish(connect, statement, result);
 	}
-
-
+/*
+	public static void main(String[]args) throws RemoteException{
+		UserCreditHistoryDataServiceMySqlImpl p = new UserCreditHistoryDataServiceMySqlImpl();
+		p.initUserCreditHistoryDataService();
+		
+		p.updateHistory(new UserCreditHistoryPO(20905098,30,Date.valueOf("2016-12-31")));
+		p.updateHistory(new UserCreditHistoryPO(20905098,-20,Date.valueOf("2017-10-20")));
+		//p.insertPromotion(new PromotionPO("Fourth","FourthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341));
+		
+		p.finishUserCreditHistoryDataService();
+	}
+*/
 }

@@ -13,6 +13,7 @@ import java.sql.Date;
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.promotiondataservice.PromotionDataService;
 import po.PromotionPO;
+import po.PromotionType;
 
 public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 	
@@ -61,18 +62,24 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 		try {
 			statement = connect.prepareStatement("select * from promotion where id = ?");
 			
-			//列：id; content; start
+			//列：id; name; content; start； stop; promotionType
 			statement.setString(1, String.valueOf(id));
 			
 			result = statement.executeQuery();
+			String tempName;
 			String tempContent;
 			String tempStart;
+			String tempStop;
+			String tempPromotionType;////............................
 			
 			//遍历result
 			while(result.next()){
-				tempContent = result.getString(2);
-				tempStart = result.getString(3);
-				list.add(new PromotionPO(tempContent, parse(tempStart), id));
+				tempName = result.getString(2);
+				tempContent = result.getString(3);
+				tempStart = result.getString(4);
+				tempStop = result.getString(5);//
+				tempPromotionType = result.getString(6);//
+				list.add(new PromotionPO( tempName, tempContent, parse(tempStart), parse(tempStop), parsePromotionType(tempPromotionType), id));
 			}
 			
 		} catch (SQLException e) {
@@ -100,20 +107,29 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 		try {
 			statement = connect.prepareStatement("select * from promotion where id = ? and start = ?");
 			
-			//列：id; content; start
+			//列：id; name; content; start; stop; promotionType
 			statement.setString(1, String.valueOf(id));
 			statement.setString(2, parse(start));
 			
 			result = statement.executeQuery();
+			String tempName;
 			String tempContent;
+			String tempStop;
+			String tempPromotionType;
 			
 			//遍历result
 			while(result.next()){
-				tempContent = result.getString(2);
-				list.add(new PromotionPO(tempContent, start, id));
+				tempName = result.getString(2);
+				tempContent = result.getString(3);
+				tempStop = result.getString(5);
+				tempPromotionType = result.getString(6);//
+				list.add(new PromotionPO( tempName, tempContent, start, parse(tempStop), parsePromotionType(tempPromotionType), id));
 			}
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -159,12 +175,15 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 				if(list.get(i).getContent().equals(ppo.getContent())) return;
 			}
 			
-			//列：id; content; start
-			statement = connect.prepareStatement("insert into promotion values(?, ?, ?)");
+			//列：id; name; content; start; stop; promotionType
+			statement = connect.prepareStatement("insert into promotion values(?, ?, ?, ?, ?, ?)");
 			
 			statement.setString(1, String.valueOf(ppo.getID()));
-			statement.setString(2, String.valueOf(ppo.getContent()));
-			statement.setString(3, parse(ppo.getStartTime()));
+			statement.setString(2, String.valueOf(ppo.getPromotionName()));
+			statement.setString(3, String.valueOf(ppo.getContent()));
+			statement.setString(4, parse(ppo.getStartTime()));
+			statement.setString(5, parse(ppo.getStopTime()));
+			statement.setString(6, parsePromotionType(ppo.getPromotionType()));
 			
 			statement.execute();
 		} catch (SQLException e) {
@@ -182,11 +201,13 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 	public void deletePromotion(PromotionPO ppo) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
-			//列：id; content; start
-			statement = connect.prepareStatement("delete from promotion where id = ? and content = ? and start = ?");
+			//列：id; name; content; start; stop; promotionType
+			statement = connect.prepareStatement("delete from promotion where id = ? and content = ? and start = ? and stop = ? and name = ?");//
 			statement.setString(1, String.valueOf(ppo.getID()));
 			statement.setString(2, ppo.getContent());
 			statement.setString(3, parse(ppo.getStartTime()));
+			statement.setString(4, parse(ppo.getStopTime()));//
+			statement.setString(5, ppo.getPromotionName());
 			
 			statement.execute();
 		} catch (SQLException e) {
@@ -226,4 +247,38 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 		return new Date(time.getTime());
 	}
 
+	private PromotionType parsePromotionType(String s) throws ParseException{
+		if(s.equals("FULL_CUT")){
+			return PromotionType.FULL_CUT;
+		}
+		if(s.equals("DISCOUNT")){
+			return PromotionType.DISCOUNT;
+		}
+		return null;
+	}
+	
+	private String parsePromotionType(PromotionType pt){
+		if(pt == PromotionType.FULL_CUT)
+			return "FULL_CUT";
+		if(pt == PromotionType.DISCOUNT)
+			return "DISCOUNT";
+		else
+			return "DEFAUT";
+	}
+	
+	/*
+	public static void main(String[]args) throws RemoteException{
+		PromotionDataServiceMySqlImpl p = new PromotionDataServiceMySqlImpl();
+		p.initPromotionDataService();
+		
+		ArrayList<PromotionPO> list = p.findsPromotion(20902341);
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i).getPromotionName());
+		}
+		p.insertPromotion(new PromotionPO("中文尝试","EighthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341));
+		//p.insertPromotion(new PromotionPO("Fourth","FourthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341));
+		
+		p.finishPromotionDataService();
+	}
+	*/
 }
