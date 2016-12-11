@@ -29,7 +29,7 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 		// TODO Auto-generated method stub
 		try {
 			//列：id; name; content; start; stop; every; cut
-			statement = connect.prepareStatement("insert into fullCutPromotion values(?, ?, ?, ?, ?, ?, ?)");
+			statement = connect.prepareStatement("insert into fullcutpromotion values(?, ?, ?, ?, ?, ?, ?)");
 			
 			statement.setString(1, String.valueOf(fpo.getID()));
 			statement.setString(2, String.valueOf(fpo.getPromotionName()));
@@ -51,7 +51,7 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 		// TODO Auto-generated method stub
 		try {
 			//列：id; name; content; start; stop; every; cut
-			statement = connect.prepareStatement("delete from fullCutPromotion where start = ? and stop = ? and name = ?");//
+			statement = connect.prepareStatement("delete from fullcutpromotion where start = ? and stop = ? and name = ?");//
 			
 			statement.setString(1, parse(fpo.getStartTime()));
 			statement.setString(2, parse(fpo.getStopTime()));//

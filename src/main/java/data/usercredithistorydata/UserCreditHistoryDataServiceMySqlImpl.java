@@ -30,7 +30,7 @@ public class UserCreditHistoryDataServiceMySqlImpl implements UserCreditHistoryD
 		// TODO Auto-generated method stub
 		try{
 			//列：id; change; date
-			statement = connect.prepareStatement("insert into userCreditHistory values(?, ?, ?)");
+			statement = connect.prepareStatement("insert into usercredithistory values(?, ?, ?)");
 			
 			statement.setString(1, String.valueOf(ucpo.getUserId()));
 			statement.setString(2, String.valueOf(ucpo.getChange()));
@@ -49,7 +49,7 @@ public class UserCreditHistoryDataServiceMySqlImpl implements UserCreditHistoryD
 		ArrayList<UserCreditHistoryPO> list = new ArrayList<UserCreditHistoryPO>();
 		 
 		try{
-			statement = connect.prepareStatement("select * from userCreditHistory where id = ?");
+			statement = connect.prepareStatement("select * from usercredithistory where id = ?");
 			
 			//列：id; change; date
 			statement.setString(1, String.valueOf(userId));
@@ -77,7 +77,7 @@ public class UserCreditHistoryDataServiceMySqlImpl implements UserCreditHistoryD
 		ArrayList<UserCreditHistoryPO> list = new ArrayList<UserCreditHistoryPO>();
 		 
 		try{
-			statement = connect.prepareStatement("select * from userCreditHistory");
+			statement = connect.prepareStatement("select * from usercredithistory");
 			
 			//列：id; change; date
 			result = statement.executeQuery();
