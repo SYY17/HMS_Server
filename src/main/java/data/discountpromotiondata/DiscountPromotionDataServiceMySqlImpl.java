@@ -80,15 +80,15 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(date);
 	}
-	/*
+	
 	public static void main(String[]args) throws RemoteException{
 		DiscountPromotionDataServiceMySqlImpl p = new DiscountPromotionDataServiceMySqlImpl();
 		p.initDiscountPromotionDataService();
 		
 		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
-		p.insertDiscountPromotion(new DiscountPromotionPO("十五","SeventhPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+		p.insertDiscountPromotion(new DiscountPromotionPO("新的尝试","SeventhPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
 		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
 		p.finishDiscountPromotionDataService();
 	}
-	*/
+	
 }
