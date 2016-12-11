@@ -48,9 +48,9 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 			
 			//遍历result
 			while(result.next()){
-				birthday = result.getDate(1);
-				phone = result.getString(2);
-				email = result.getString(3);
+				birthday = result.getDate(2);
+				phone = result.getString(3);
+				email = result.getString(4);
 			}
 			
 			if(birthday != null){

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 import data.creditdata.CreditDataServiceMySqlImpl;
+import data.customerdata.CustomerDataServiceMySqlImpl;
 import data.datafactory.DataFactoryServiceMySqlImpl;
 import data.discountpromotiondata.DiscountPromotionDataServiceMySqlImpl;
 import data.fullcutpromotiondata.FullCutPromotionDataServiceMySqlImpl;
@@ -16,6 +17,7 @@ import data.roomdata.RoomDataServiceMySqlImpl;
 import data.usercredithistorydata.UserCreditHistoryDataServiceMySqlImpl;
 import data.userdata.UserDataServiceMySqlImpl;
 import dataservice.creditdataservice.CreditDataService;
+import dataservice.customerdataservice.CustomerDataService;
 import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.discountpromotiondataservice.DiscountPromotionDataService;
 import dataservice.fullcutpromotiondataservice.FullCutPromotionDataService;
@@ -26,6 +28,7 @@ import dataservice.roomdataservice.RoomDataService;
 import dataservice.usercredithistoryservice.UserCreditHistoryDataService;
 import dataservice.userdataservice.UserDataService;
 import po.CreditPO;
+import po.CustomerPO;
 import po.DiscountPromotionPO;
 import po.FullCutPromotionPO;
 import po.HotelPO;
@@ -38,7 +41,7 @@ import po.UserCreditHistoryPO;
 import po.UserPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements CreditDataService, HotelDataService,
-		OrderDataService, PromotionDataService, RoomDataService, UserDataService, UserCreditHistoryDataService, FullCutPromotionDataService, DiscountPromotionDataService,DataFactoryService {
+		OrderDataService, PromotionDataService, RoomDataService, UserDataService, UserCreditHistoryDataService, FullCutPromotionDataService, DiscountPromotionDataService, CustomerDataService, DataFactoryService {
 
 	/**
 	 * 
@@ -53,6 +56,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	private UserCreditHistoryDataService userCreditHistoryDataService;
 	private FullCutPromotionDataService fullCutPromotionDataService;
 	private DiscountPromotionDataService discountPromotionDataService;
+	private CustomerDataService customerDataService;
 	private DataFactoryService dataFactoryService;
 
 	protected DataRemoteObject() throws RemoteException {
@@ -65,6 +69,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		userCreditHistoryDataService = new UserCreditHistoryDataServiceMySqlImpl();
 		fullCutPromotionDataService = new FullCutPromotionDataServiceMySqlImpl();
 		discountPromotionDataService = new DiscountPromotionDataServiceMySqlImpl();
+		customerDataService = new CustomerDataServiceMySqlImpl();
 		dataFactoryService = new DataFactoryServiceMySqlImpl();
 	}
 
@@ -723,82 +728,176 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		creditDataService.finishCreditDataService();
 	}
 
+	/**
+	 * DiscountPromotionDataService 以下为折扣类营销策略数据信息服务的通信实现
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#insertDiscountPromotion(po.DiscountPromotionPO)
+	 */
 	@Override
 	public void insertDiscountPromotion(DiscountPromotionPO dpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		discountPromotionDataService.insertDiscountPromotion(dpo);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#deleteDiscountPromotion(po.DiscountPromotionPO)
+	 */
 	@Override
 	public void deleteDiscountPromotion(DiscountPromotionPO dpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		discountPromotionDataService.deleteDiscountPromotion(dpo);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#initDiscountPromotionDataService()
+	 */
 	@Override
 	public void initDiscountPromotionDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		discountPromotionDataService.initDiscountPromotionDataService();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#finishDiscountPromotionDataService()
+	 */
 	@Override
 	public void finishDiscountPromotionDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		discountPromotionDataService.finishDiscountPromotionDataService();
 	}
 
+	/**
+	 * FullCutDataService 以下为满减类营销策略数据信息服务的通信实现
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#insertFullCutPromotion(po.FullCutPromotionPO)
+	 */
 	@Override
 	public void insertFullCutPromotion(FullCutPromotionPO fpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		fullCutPromotionDataService.insertFullCutPromotion(fpo);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#deleteFullCutPromotion(po.FullCutPromotionPO)
+	 */
 	@Override
 	public void deleteFullCutPromotion(FullCutPromotionPO fpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		fullCutPromotionDataService.deleteFullCutPromotion(fpo);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#initFullCutPromotionDataService()
+	 */
 	@Override
 	public void initFullCutPromotionDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		fullCutPromotionDataService.initFullCutPromotionDataService();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#finishFullCutPromotionDataService()
+	 */
 	@Override
 	public void finishFullCutPromotionDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		fullCutPromotionDataService.finishFullCutPromotionDataService();
 	}
 
+	/**
+	 * 以下为信用值记录数据信息服务的通信实现
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.usercredithistoryservice.UserCreditHistoryDataService#updateHistory(po.UserCreditHistoryPO)
+	 */
 	@Override
 	public void updateHistory(UserCreditHistoryPO ucpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		userCreditHistoryDataService.updateHistory(ucpo);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.usercredithistoryservice.UserCreditHistoryDataService#findCreditHistory(int)
+	 */
 	@Override
 	public ArrayList<UserCreditHistoryPO> findCreditHistory(int userId) throws RemoteException {
 		// TODO Auto-generated method stub
 		return userCreditHistoryDataService.findCreditHistory(userId);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.usercredithistoryservice.UserCreditHistoryDataService#getAllCreditHistory()
+	 */
 	@Override
 	public ArrayList<UserCreditHistoryPO> getAllCreditHistory() throws RemoteException {
 		// TODO Auto-generated method stub
 		return userCreditHistoryDataService.getAllCreditHistory();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.usercredithistoryservice.UserCreditHistoryDataService#initUserCreditHistoryDataService()
+	 */
 	@Override
 	public void initUserCreditHistoryDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		userCreditHistoryDataService.initUserCreditHistoryDataService();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.usercredithistoryservice.UserCreditHistoryDataService#finishUserCreditHistoryDataService()
+	 */
 	@Override
 	public void finishUserCreditHistoryDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		userCreditHistoryDataService.finishUserCreditHistoryDataService();
+	}
+
+	/**
+	 * CustomerDataService 以下为信用值数据信息服务的通信实现
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.customerdataservice.CustomerDataService#getCustomerInfo(java.lang.String)
+	 */
+	@Override
+	public CustomerPO getCustomerInfo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return customerDataService.getCustomerInfo(username);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.customerdataservice.CustomerDataService#initCustomerDataService()
+	 */
+	@Override
+	public void initCustomerDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		customerDataService.initCustomerDataService();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.customerdataservice.CustomerDataService#finishCustomerDataService()
+	 */
+	@Override
+	public void finishCustomerDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		customerDataService.finishCustomerDataService();
 	}
 
 }
