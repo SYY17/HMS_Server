@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="runner.Server_controller">
+   <children>
+      <ImageView fitHeight="238.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icon/bg_2.jpg" />
+         </image></ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="65.0" layoutX="13.0" layoutY="8.0" opacity="0.79" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="355.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Rectangle>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="266.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icon/server.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="303.0" layoutY="31.0" text="服务器" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icon/logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="84.0" layoutY="28.0" text="酒店管理系统" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#aecae8" height="148.0" layoutX="13.0" layoutY="80.0" opacity="0.31" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="355.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Rectangle>
+      <ImageView fx:id="startImage" fitHeight="50.0" fitWidth="50.0" layoutX="42.0" layoutY="115.0" onMouseClicked="#onClickedStart" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icon/run.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="startButton" layoutX="51.0" layoutY="167.0" onMouseClicked="#onClickedStart" text="运行">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="91.0" layoutX="118.0" layoutY="105.0" stroke="#daa3a3" strokeType="INSIDE" strokeWidth="2.0" width="228.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Rectangle>
+      <Label layoutX="145.0" layoutY="138.0" text="当前在线人数">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="onLine" editable="false" layoutX="266.0" layoutY="139.0" prefHeight="23.0" prefWidth="50.0" promptText="0">
+         <effect>
+            <InnerShadow choke="0.21" color="#ffabab" />
+         </effect>
+      </TextField>
+      <ImageView fx:id="stopImage" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="42.0" layoutY="115.0" onMouseClicked="#onClickedStop" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@icon/stop.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="stopButton" disable="true" layoutX="51.0" layoutY="167.0" onMouseClicked="#onClickedStop" text="中止" visible="false">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+   </children>
+</Pane>

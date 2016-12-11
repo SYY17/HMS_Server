@@ -13,9 +13,9 @@ public class Server_start extends Application{
 		// TODO Auto-generated method stub
 		try {
 			Parent root = FXMLLoader
-					.load(getClass().getClassLoader().getResource("runner/Server.fxml"));
+					.load(getClass().getClassLoader().getResource("fxml/ServerUI.fxml"));
 
-			Scene scene = new Scene(root, 239, 133);
+			Scene scene = new Scene(root, 380, 238);
 			Server_controller.stage = primaryStage;
 			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			// primaryStage.initStyle(StageStyle.DECORATED);
