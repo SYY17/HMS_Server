@@ -234,15 +234,15 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 		configure.finish(connect, statement, result);
 	}
 
-	public static void main(String args[]) throws RemoteException {
-		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
-		o.initOrderDataService();
-		 o.insertOrder(new OrderPO(60102931, "庄宇州", "天字一号房",
-		 OrderStatus.Abnormal, 100, RoomType.KING_SIZE_ROOM, 2,
-		 new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0)));
-		o.findOrderByOrderID(60102931);
-//		o.deleteOrder(60102931);
-		o.findOrderByUserName("tom");
-		o.finishOrderDataService();
-	}
+//	public static void main(String args[]) throws RemoteException {
+//		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
+//		o.initOrderDataService();
+//		 o.insertOrder(new OrderPO(60102931, "庄宇州", "天字一号房",
+//		 OrderStatus.Abnormal, 100, RoomType.KING_SIZE_ROOM, 2,
+//		 new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0)));
+//		o.findOrderByOrderID(60102931);
+////		o.deleteOrder(60102931);
+//		o.findOrderByUserName("tom");
+//		o.finishOrderDataService();
+//	}
 }
