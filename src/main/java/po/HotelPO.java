@@ -20,7 +20,7 @@ public class HotelPO implements Serializable{
 	String phoneNumber;
 	
 	public HotelPO(int hid,String hn,String ha,String ba,String hd,int sl,/*int rn,ArrayList<RoomPO> rooms,*/
-			int r,String sn,String pn){
+			double r,String sn,String pn){
 		hotelID=hid;
 		hotelName=hn;
 		hotelAddress=ha;
