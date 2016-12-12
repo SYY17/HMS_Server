@@ -128,7 +128,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 			int star = -1;
 			String phone = "";
 			String description = "";
-			int rate = -1;
+			double rate = -1.0;
 			
 			while(result.next()){
 				id = Integer.valueOf(result.getString(1));
@@ -138,7 +138,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 				star = Integer.valueOf(result.getString(6));
 				phone = result.getString(7);
 				description = result.getString(8);
-				rate = Integer.valueOf(result.getString(9));
+				rate = Double.valueOf(result.getString(9));
 			}
 			
 			return new HotelPO(id, name, address, businessarea, description, star, rate, workername, phone);
@@ -149,6 +149,22 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 		return null;
 	}
 
+	
+//	public static void main(String[] args){
+//		HotelDataService hotel = new HotelDataServiceMySqlImpl();
+//		try {
+//			hotel.initHotelDataService();
+//			HotelPO hpo = new HotelPO(20905100, "南京大学", "南京", "大学城", "普通的大学生宿舍", 5, 5.0, "张三", "12345678911");
+//			hotel.updateHotel(hpo);
+//			hotel.finishHotelDataService();
+//			System.out.println(hpo.getHotelID());
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
+	
 	/**
 	 * 
 	 * @param field
@@ -175,7 +191,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 			int star = -1;
 			String phone = "";
 			String description = "";
-			int rate = -1;
+			double rate = -1.0;
 			
 			ArrayList<HotelPO> hpoList = new ArrayList<HotelPO>();
 			
@@ -188,7 +204,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 				star = Integer.valueOf(result.getString(6));
 				phone = result.getString(7);
 				description = result.getString(8);
-				rate = Integer.valueOf(result.getString(9));
+				rate = Double.valueOf(result.getString(9));
 				
 				HotelPO hpo = new HotelPO(id, hotelname, address, businessarea, description, star, rate, workername, phone);
 				hpoList.add(hpo);
@@ -227,7 +243,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 			int star = -1;
 			String phone = "";
 			String description = "";
-			int rate = -1;
+			double rate = -1;
 			
 			ArrayList<HotelPO> hpoList = new ArrayList<HotelPO>();
 			
@@ -240,7 +256,7 @@ public class HotelDataServiceMySqlImpl implements HotelDataService{
 				star = Integer.valueOf(result.getString(6));
 				phone = result.getString(7);
 				description = result.getString(8);
-				rate = Integer.valueOf(result.getString(9));
+				rate = Double.valueOf(result.getString(9));
 				
 				HotelPO hpo = new HotelPO(id, hotelname, address, businessarea, description, star, rate, workername, phone);
 				hpoList.add(hpo);
