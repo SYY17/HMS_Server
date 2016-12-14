@@ -241,7 +241,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 //		 OrderStatus.Abnormal, 100, RoomType.KING_SIZE_ROOM, 2,
 //		 new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0)));
 //		o.findOrderByOrderID(60102931);
-////		o.deleteOrder(60102931);
+//		o.deleteOrder(60102931);
 //		o.findOrderByUserName("tom");
 //		o.finishOrderDataService();
 //	}
