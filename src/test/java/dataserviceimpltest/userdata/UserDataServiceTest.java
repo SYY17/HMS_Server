@@ -30,6 +30,10 @@ public class UserDataServiceTest {
 		userDataService.initUserDataService();
 	}
 	
+	/**
+	 * 查找用户信息的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void TestFindUser() throws RemoteException {
 		upo = userDataService.findUser("manager");
@@ -45,20 +49,49 @@ public class UserDataServiceTest {
 		assertEquals("manager", username);
 	}
 	
+	/**
+	 * 添加用户信息的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testInsertUser() throws RemoteException {
 		upo = new UserPO(id, name, password);
 		userDataService.insertUser(upo);
-		
-		upo = userDataService.findUser(name);
-		
-		id = upo.getID();
 		
 		//信息完全相同
 		assertEquals(name, upo.getName());
 		assertEquals(password, upo.getPassword());
 	}
 	
+	/**
+	 * 更新用户信息的测试用例套件
+	 * @throws RemoteException
+	 */
+	@Test
+	public void testModifyUser() throws RemoteException {
+		//初始化ID
+		upo = userDataService.findUser(name);
+		id = upo.getID();
+		
+		//重置密码
+		password = "666666";
+		upo = new UserPO(id, name, password);
+		
+		userDataService.updateUser(upo);
+		
+		//再次按照用户名查找用户
+		upo = userDataService.findUser(name);
+		
+		//信息相同
+		assertEquals(id, upo.getID());
+		assertEquals(password, upo.getPassword());
+		assertEquals(name, upo.getName());
+	}
+	
+	/**
+	 * 删除用户信息的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testDeleteUser() throws RemoteException {
 		upo = userDataService.findUser(name);

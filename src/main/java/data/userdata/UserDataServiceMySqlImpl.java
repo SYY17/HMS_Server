@@ -103,11 +103,9 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 		// TODO Auto-generated method stub
 		try {
 			//列：id; username; password
-			statement = connect.prepareStatement("update user set id = ?, username = ?, password = ? where id = ?");
-			statement.setInt(1, upo.getID());
+			statement = connect.prepareStatement("update user set password = ? where username = ?");
+			statement.setString(1, upo.getPassword());
 			statement.setString(2, upo.getName());
-			statement.setString(3, upo.getPassword());
-			statement.setInt(4, upo.getID());
 			
 			statement.execute();
 		} catch (SQLException e) {
