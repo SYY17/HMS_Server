@@ -92,6 +92,53 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 		}
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @param username
+	 * @return 添加新的顾客信息
+	 * @throws RemoteException
+	 */
+	@Override
+	public boolean insertCustomer(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		
+		try {
+			statement = connect.prepareStatement("insert into customer values(?, , , ,)");
+			statement.setString(1, username);
+			
+			result = statement.execute();
+			System.out.println(result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param username
+	 * @return 删除用户信息
+	 * @throws RemoteException
+	 */
+	@Override
+	public boolean deleteCustomer(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		try {
+			statement = connect.prepareStatement("delete from customer where username = ?");
+			statement.setString(1, username);
+			
+			result = statement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	/**
 	 * @throws RemoteException

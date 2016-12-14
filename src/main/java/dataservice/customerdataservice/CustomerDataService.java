@@ -10,6 +10,14 @@ public interface CustomerDataService extends Remote{
 	/**
 	 * 
 	 * @param username
+	 * @return 添加新的顾客信息
+	 * @throws RemoteException
+	 */
+	public boolean insertCustomer(String username) throws RemoteException;
+	
+	/**
+	 * 
+	 * @param username
 	 * @return 根据用户名查找并返回顾客信息
 	 * @throws RemoteException
 	 */
@@ -22,6 +30,14 @@ public interface CustomerDataService extends Remote{
 	 * @throws RemoteException
 	 */
 	public boolean updateCustomerInfo(CustomerPO cpo) throws RemoteException;
+	
+	/**
+	 * 
+	 * @param username
+	 * @return 删除用户信息
+	 * @throws RemoteException
+	 */
+	public boolean deleteCustomer(String username) throws RemoteException;
 	
 	/**
 	 * 

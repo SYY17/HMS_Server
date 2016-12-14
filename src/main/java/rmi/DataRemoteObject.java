@@ -889,6 +889,26 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		// TODO Auto-generated method stub
 		return customerDataService.updateCustomerInfo(cpo);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.customerdataservice.CustomerDataService#insertCustomer(java.lang.String)
+	 */
+	@Override
+	public boolean insertCustomer(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return customerDataService.insertCustomer(username);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.customerdataservice.CustomerDataService#deleteCustomer(java.lang.String)
+	 */
+	@Override
+	public boolean deleteCustomer(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return customerDataService.deleteCustomer(username);
+	}
 
 	/*
 	 * (non-Javadoc)
