@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.discountpromotiondataservice.DiscountPromotionDataService;
 import po.DiscountPromotionPO;
-import po.PromotionType;
 
 public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionDataService {
 

@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.fullcutpromotiondataservice.FullCutPromotionDataService;
 import po.FullCutPromotionPO;
-import po.PromotionType;
 
 public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDataService {
 

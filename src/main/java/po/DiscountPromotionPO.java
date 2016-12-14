@@ -2,7 +2,6 @@ package po;
 
 import java.sql.Date;
 
-import po.Promotion;
 import po.PromotionType;
 import po.PromotionPO;
 

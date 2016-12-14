@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 import data.configuration.ConfigurationServiceMySqlImpl;
-import data.creditdata.CreditDataServiceMySqlImpl;
 import dataservice.usercredithistoryservice.UserCreditHistoryDataService;
 import po.UserCreditHistoryPO;
 

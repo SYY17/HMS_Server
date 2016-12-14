@@ -41,20 +41,22 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 			
 			result = statement.executeQuery();
 			
-			//CustomerPO: birthday; phone; email
+			//CustomerPO: birthday; phone; email; address
 			Date birthday = null;
 			String phone = "";
 			String email = "";
+			String address = "";
 			
 			//遍历result
 			while(result.next()){
 				birthday = result.getDate(2);
 				phone = result.getString(3);
 				email = result.getString(4);
+				address = result.getString(5);
 			}
 			
 			if(birthday != null){
-				return new CustomerPO(new UserPO(0, username, null), birthday, phone, email);
+				return new CustomerPO(new UserPO(0, username, null), birthday, phone, email, address);
 			}
 			
 		} catch (SQLException e) {
@@ -63,13 +65,46 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 		}
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @param cpo
+	 * @return 更新顾客信息
+	 * @throws RemoteException
+	 */
+	@Override
+	public boolean updateCustomerInfo(CustomerPO cpo) throws RemoteException {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		try {
+			statement = connect.prepareStatement("update customer set birthday = ?, email = ?, phone = ?, address = ? where username = ?");
+			
+			statement.setDate(1, cpo.getBirthday());
+			statement.setString(2, cpo.getEmail());
+			statement.setString(3, cpo.getPhoneNumber());
+			statement.setString(4, cpo.getAddress());
+			statement.setString(5, cpo.getName());
+			
+			result = statement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 
+	/**
+	 * @throws RemoteException
+	 */
 	@Override
 	public void initCustomerDataService() throws RemoteException {
 		// TODO Auto-generated method stub
 		connect = configure.init();
 	}
 
+	/**
+	 * @throws RemoteException
+	 */
 	@Override
 	public void finishCustomerDataService() throws RemoteException {
 		// TODO Auto-generated method stub

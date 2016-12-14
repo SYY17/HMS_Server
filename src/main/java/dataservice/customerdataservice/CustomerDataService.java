@@ -17,6 +17,14 @@ public interface CustomerDataService extends Remote{
 	
 	/**
 	 * 
+	 * @param cpo
+	 * @return 更新顾客信息
+	 * @throws RemoteException
+	 */
+	public boolean updateCustomerInfo(CustomerPO cpo) throws RemoteException;
+	
+	/**
+	 * 
 	 * @throws RemoteException
 	 */
 	public void initCustomerDataService() throws RemoteException;
