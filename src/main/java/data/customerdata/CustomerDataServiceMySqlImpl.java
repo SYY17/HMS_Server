@@ -27,6 +27,61 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 	/**
 	 * 
 	 * @param username
+	 * @return 添加新的顾客信息
+	 * @throws RemoteException
+	 */
+	@Override
+	public boolean insertCustomer(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		
+		try {
+			statement = connect.prepareStatement("insert into customer values(?, ?, ?, ?, ?)");
+			statement.setString(1, username);
+			statement.setDate(2, null);
+			statement.setString(3, null);
+			statement.setString(4, null);
+			statement.setString(5, null);
+			
+			result = !statement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param cpo
+	 * @return 更新顾客信息
+	 * @throws RemoteException
+	 */
+	@Override
+	public boolean updateCustomerInfo(CustomerPO cpo) throws RemoteException {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		try {
+			statement = connect.prepareStatement("update customer set birthday = ?, email = ?, phone = ?, address = ? where username = ?");
+			
+			statement.setDate(1, cpo.getBirthday());
+			statement.setString(2, cpo.getEmail());
+			statement.setString(3, cpo.getPhoneNumber());
+			statement.setString(4, cpo.getAddress());
+			statement.setString(5, cpo.getName());
+			
+			result = !statement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param username
 	 * @return 根据用户名查找并返回顾客信息
 	 * @throws RemoteException
 	 */
@@ -65,58 +120,6 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 		}
 		return null;
 	}
-	
-	/**
-	 * 
-	 * @param cpo
-	 * @return 更新顾客信息
-	 * @throws RemoteException
-	 */
-	@Override
-	public boolean updateCustomerInfo(CustomerPO cpo) throws RemoteException {
-		// TODO Auto-generated method stub
-		boolean result = false;
-		try {
-			statement = connect.prepareStatement("update customer set birthday = ?, email = ?, phone = ?, address = ? where username = ?");
-			
-			statement.setDate(1, cpo.getBirthday());
-			statement.setString(2, cpo.getEmail());
-			statement.setString(3, cpo.getPhoneNumber());
-			statement.setString(4, cpo.getAddress());
-			statement.setString(5, cpo.getName());
-			
-			result = statement.execute();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	/**
-	 * 
-	 * @param username
-	 * @return 添加新的顾客信息
-	 * @throws RemoteException
-	 */
-	@Override
-	public boolean insertCustomer(String username) throws RemoteException {
-		// TODO Auto-generated method stub
-		boolean result = false;
-		
-		try {
-			statement = connect.prepareStatement("insert into customer values(?, , , ,)");
-			statement.setString(1, username);
-			
-			result = statement.execute();
-			System.out.println(result);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
 
 	/**
 	 * 
@@ -132,7 +135,7 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 			statement = connect.prepareStatement("delete from customer where username = ?");
 			statement.setString(1, username);
 			
-			result = statement.execute();
+			result = !statement.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

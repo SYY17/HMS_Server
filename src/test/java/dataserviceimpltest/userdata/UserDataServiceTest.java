@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.rmi.RemoteException;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -100,5 +101,14 @@ public class UserDataServiceTest {
 		
 		//不再存在信息
 		assertTrue(upo == null);
+	}
+	
+	/**
+	 * 关闭服务
+	 * @throws Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+		userDataService.finishUserDataService();
 	}
 }
