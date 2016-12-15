@@ -930,4 +930,53 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		customerDataService.finishCustomerDataService();
 	}
 
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, String content, Date start)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return discountPromotionDataService.findsDiscountPromotion(id, content, start);
+	}
+
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return discountPromotionDataService.findsDiscountPromotion(id);
+	}
+
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, Date start) throws RemoteException {
+		// TODO Auto-generated method stub
+		return discountPromotionDataService.findsDiscountPromotion(id, start);
+	}
+
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, String content) throws RemoteException {
+		// TODO Auto-generated method stub
+		return discountPromotionDataService.findsDiscountPromotion(id, content);
+	}
+
+	@Override
+	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id, String content, Date start) throws RemoteException {
+		// TODO Auto-generated method stub
+		return fullCutPromotionDataService.findsFullPromotion(id, content, start);
+	}
+
+	@Override
+	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return fullCutPromotionDataService.findsFullPromotion(id);
+	}
+
+	@Override
+	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id, Date start) throws RemoteException {
+		// TODO Auto-generated method stub
+		return fullCutPromotionDataService.findsFullPromotion(id, start);
+	}
+
+	@Override
+	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id, String content) throws RemoteException {
+		// TODO Auto-generated method stub
+		return fullCutPromotionDataService.findsFullPromotion(id, content);
+	}
+
 }

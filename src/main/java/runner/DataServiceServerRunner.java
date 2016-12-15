@@ -19,7 +19,7 @@ public class DataServiceServerRunner {
 		remoteController.stopServer();
 	}
 	
-//	public static void main(String[] args) {
-//		new DataServiceServerRunner();
-//	}
+	public static void main(String[] args) {
+		new DataServiceServerRunner();
+	}
 }

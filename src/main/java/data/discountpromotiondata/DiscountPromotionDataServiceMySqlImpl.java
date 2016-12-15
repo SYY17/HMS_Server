@@ -7,10 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import data.configuration.ConfigurationServiceMySqlImpl;
 import dataservice.discountpromotiondataservice.DiscountPromotionDataService;
 import po.DiscountPromotionPO;
+import po.PromotionType;
 
 public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionDataService {
 
@@ -90,4 +92,115 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 		p.finishDiscountPromotionDataService();
 	}
 	*/
+
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, String content, Date start) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<DiscountPromotionPO> list = findsDiscountPromotion(id, start);
+		for(int i = 0; i< list.size(); i++){
+			DiscountPromotionPO dpo = list.get(i);
+			if(!dpo.getContent().contains(content)){
+				list.remove(dpo);
+				i--;
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<DiscountPromotionPO> list = new ArrayList<DiscountPromotionPO>();
+		
+		try {
+			statement = connect.prepareStatement("select * from discountpromotion where id = ?");
+			
+			//列：id; name; content; start； stop; discount
+			statement.setString(1, String.valueOf(id));
+			
+			result = statement.executeQuery();
+			String tempName;
+			String tempContent;
+			String tempStart;
+			String tempStop;
+			String tempDiscount;////............................
+			
+			//遍历result
+			while(result.next()){
+				tempName = result.getString(2);
+				tempContent = result.getString(3);
+				tempStart = result.getString(4);
+				tempStop = result.getString(5);//
+				tempDiscount = result.getString(6);//
+				list.add(new DiscountPromotionPO( tempName, tempContent, parse(tempStart), parse(tempStop), PromotionType.DISCOUNT, id, Double.parseDouble(tempDiscount)));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return list;
+	}
+
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, Date start) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<DiscountPromotionPO> list = new ArrayList<DiscountPromotionPO>();
+		
+		try {
+			statement = connect.prepareStatement("select * from discountpromotion where id = ? and start = ?");
+			
+			//列：id; name; content; start; stop; discount
+			statement.setString(1, String.valueOf(id));
+			statement.setString(2, parse(start));
+			
+			result = statement.executeQuery();
+			String tempName;
+			String tempContent;
+			String tempStop;
+			String tempDiscount;
+			
+			//遍历result
+			while(result.next()){
+				tempName = result.getString(2);
+				tempContent = result.getString(3);
+				tempStop = result.getString(5);
+				tempDiscount = result.getString(6);//
+				list.add(new DiscountPromotionPO( tempName, tempContent, start, parse(tempStop), PromotionType.DISCOUNT, id, Double.parseDouble(tempDiscount)));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, String content) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<DiscountPromotionPO> list = new ArrayList<DiscountPromotionPO>();
+		list = findsDiscountPromotion(id);
+		for(int i = 0; i< list.size(); i++){
+			DiscountPromotionPO dpo = list.get(i);
+			if(!dpo.getContent().contains(content)){
+				list.remove(dpo);
+				i--;
+			}
+		}
+		return list;
+	}
+	
+	private Date parse(String s){
+		java.util.Date d = null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try{
+			d = (Date) format.parse(s);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		Date date = new Date(d.getTime());
+		return date;
+	}
+	
 }
