@@ -30,6 +30,10 @@ public class OrderDataServiceTest {
 	private Date checkOut;
 	private OrderPO opo;
 
+	/**
+	 * 初始化
+	 * @throws Excpetion
+	 */
 	@Before
 	public void setUp() throws Exception {
 		orderDataService = new OrderDataServiceMySqlImpl();
@@ -46,6 +50,10 @@ public class OrderDataServiceTest {
 		orderDataService.initOrderDataService();
 	}
 
+	/**
+	 * 增加订单的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testInsertOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
@@ -64,6 +72,10 @@ public class OrderDataServiceTest {
 		orderDataService.deleteOrder(orderID);
 	}
 
+	/**
+	 * 删除订单的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testDeleteOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
@@ -74,6 +86,10 @@ public class OrderDataServiceTest {
 		assertEquals(opoTemp, null);
 	}
 
+	/**
+	 * 更新订单状态的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testUpdateOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
@@ -96,12 +112,20 @@ public class OrderDataServiceTest {
 		orderDataService.deleteOrder(orderID);
 	}
 
+	/**
+	 * 查找全部订单的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindOrder() throws RemoteException {
 		ArrayList<OrderPO> orderList = orderDataService.findOrder();
 		assertNotEquals(orderList.get(0), null);
 	}
 
+	/**
+	 * 通过订单号查找订单的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindOrderByOrderID() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
@@ -120,6 +144,10 @@ public class OrderDataServiceTest {
 		orderDataService.deleteOrder(orderID);
 	}
 
+	/**
+	 * 通过用户名查找订单的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindOrderByUserName() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
@@ -138,6 +166,10 @@ public class OrderDataServiceTest {
 		orderDataService.deleteOrder(orderID);
 	}
 
+	/**
+	 * 通过酒店名称查找订单的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindOrderByHotelName() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
