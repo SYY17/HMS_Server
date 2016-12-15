@@ -33,6 +33,7 @@ public class CustomerDataServiceTest{
 	 */
 	@Before
 	public void setUp() throws Exception {
+		//初始化数据
 		customerDataService = new CustomerDataServiceMySqlImpl();
 		username = "testuser";
 		birthday = new Date(new java.util.Date().getTime());
@@ -41,6 +42,8 @@ public class CustomerDataServiceTest{
 		address = "test address";
 		upo = new UserPO(10912012, username, "000000");
 		cpo = new CustomerPO(upo, birthday, phoneNumber, email, address);
+		
+		//启动服务
 		customerDataService.initCustomerDataService();
 	}
 	
