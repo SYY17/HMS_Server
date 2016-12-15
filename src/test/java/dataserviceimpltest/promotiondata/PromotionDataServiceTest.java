@@ -25,6 +25,10 @@ public class PromotionDataServiceTest {
 	private int id;
 	private PromotionPO promotionPO;
 	
+	/**
+	 * 初始化
+	 * @throws Excpetion
+	 */
 	@Before
 	public void setUp() throws Exception {
 		promotionDataService = new PromotionDataServiceMySqlImpl();
@@ -37,6 +41,10 @@ public class PromotionDataServiceTest {
 		promotionDataService.initPromotionDataService();
 	}
 	
+	/**
+	 * 搜索策略的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindsPromotionICS() throws RemoteException  {
 		promotionPO = new PromotionPO( promotionName, content, start, stop, promotionType, id);
@@ -55,6 +63,10 @@ public class PromotionDataServiceTest {
 		promotionDataService.deletePromotion(promotionPO);
 	}
 	
+	/**
+	 * 搜索策略的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindsPromotionI() throws RemoteException  {
 		promotionPO = new PromotionPO( promotionName, content, start, stop, promotionType, id);
@@ -72,6 +84,10 @@ public class PromotionDataServiceTest {
 		promotionDataService.deletePromotion(promotionPO);
 	}
 
+	/**
+	 * 搜索策略的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindsPromotionIS() throws RemoteException  {
 		promotionPO = new PromotionPO( promotionName, content, start, stop, promotionType, id);
@@ -89,6 +105,10 @@ public class PromotionDataServiceTest {
 		promotionDataService.deletePromotion(promotionPO);
 	}
 	
+	/**
+	 * 搜索策略的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testFindsPromotionIC() throws RemoteException  {
 		promotionPO = new PromotionPO( promotionName, content, start, stop, promotionType, id);
@@ -106,6 +126,10 @@ public class PromotionDataServiceTest {
 		promotionDataService.deletePromotion(promotionPO);
 	}
 	
+	/**
+	 * 增加策略的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testInsertPromotion() throws RemoteException {
 		promotionPO = new PromotionPO( promotionName, content, start, stop, promotionType, id);
@@ -123,6 +147,10 @@ public class PromotionDataServiceTest {
 		promotionDataService.deletePromotion(promotionPO);
 	}
 	
+	/**
+	 * 删除策略的测试用例套件
+	 * @throws RemoteException
+	 */
 	@Test
 	public void testDeletePromotion() throws RemoteException {
 		promotionPO = new PromotionPO( promotionName, content, start, stop, promotionType, id);
