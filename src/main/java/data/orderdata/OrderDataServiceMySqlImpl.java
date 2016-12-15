@@ -243,6 +243,8 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 //		o.findOrderByOrderID(60102931);
 //		o.deleteOrder(60102931);
 //		o.findOrderByUserName("tom");
+//		ArrayList<OrderPO> opo = o.findOrderByHotelName("盘丝洞");
+//		System.out.println(opo.size());
 //		o.finishOrderDataService();
 //	}
 }

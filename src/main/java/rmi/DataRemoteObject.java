@@ -535,7 +535,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	 */
 	@Override
 	public ArrayList<OrderPO> findOrderByHotelName(String hotelName) throws RemoteException {
-		return orderDataService.findOrderByUserName(hotelName);
+		return orderDataService.findOrderByHotelName(hotelName);
 	}
 
 	/*
