@@ -198,15 +198,15 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 		return date;
 	}
 	
-	/*
-	public static void main(String[]args) throws RemoteException{
-		FullCutPromotionDataServiceMySqlImpl p = new FullCutPromotionDataServiceMySqlImpl();
-		p.initFullCutPromotionDataService();
-		
-		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
-		p.insertFullCutPromotion(new FullCutPromotionPO("Sixth","SixthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341,200,20));
-		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
-		p.finishFullCutPromotionDataService();
-	}
-	*/
+//	
+//	public static void main(String[]args) throws RemoteException{
+//		FullCutPromotionDataServiceMySqlImpl p = new FullCutPromotionDataServiceMySqlImpl();
+//		p.initFullCutPromotionDataService();
+//		
+//		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+//		p.insertFullCutPromotion(new FullCutPromotionPO("Sixth","SixthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341,200,20));
+//		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+//		p.finishFullCutPromotionDataService();
+//	}
+	
 }

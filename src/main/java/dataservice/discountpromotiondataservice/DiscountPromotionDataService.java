@@ -1,12 +1,13 @@
 package dataservice.discountpromotiondataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.sql.Date;
 
 import po.DiscountPromotionPO;
 
-public interface DiscountPromotionDataService {
+public interface DiscountPromotionDataService extends Remote{
 
 	/**
 	 * 

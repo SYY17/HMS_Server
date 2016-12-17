@@ -1,12 +1,13 @@
 package dataservice.fullcutpromotiondataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.sql.Date;
 
 import po.FullCutPromotionPO;
 
-public interface FullCutPromotionDataService {
+public interface FullCutPromotionDataService extends Remote{
 
 	/**
 	 * 

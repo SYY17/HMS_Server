@@ -271,7 +271,7 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 		PromotionDataServiceMySqlImpl p = new PromotionDataServiceMySqlImpl();
 		p.initPromotionDataService();
 		
-		ArrayList<PromotionPO> list = p.findsPromotion(20902341);
+		ArrayList<PromotionPO> list = p.findsPromotion(20902341,"双十二",Date.valueOf("2016-12-01"));
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).getPromotionName());
 		}
