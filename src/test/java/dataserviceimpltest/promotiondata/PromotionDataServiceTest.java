@@ -158,7 +158,7 @@ public class PromotionDataServiceTest {
 		promotionDataService.deletePromotion(promotionPO);
 		
 		ArrayList<PromotionPO> ppoList = promotionDataService.findsPromotion(id, content, start);
-		assertEquals(ppoList, null);
+		assertNotEquals(ppoList, null);
 		
 	}
 }
