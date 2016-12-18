@@ -21,7 +21,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	PreparedStatement statement;
 	ResultSet result;
 	ConfigurationServiceMySqlImpl configure;
-	static final int COL_NUM = 10;
+	static final int COL_NUM = 13;
 
 	// 类中有待修改的语句
 
@@ -38,7 +38,8 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	@Override
 	public void insertOrder(OrderPO po) throws RemoteException {
 		try {
-			statement = connect.prepareStatement("insert into hms_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			statement = connect
+					.prepareStatement("insert into hms_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ? , ?)");
 
 			statement.setInt(1, po.getOrderID());
 			statement.setString(2, po.getUserName());
@@ -50,6 +51,13 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 			statement.setTimestamp(8, po.getSetTime());
 			statement.setDate(9, po.getCheckIn());
 			statement.setDate(10, po.getCheckOut());
+			statement.setTimestamp(11, po.getDeadline());
+			statement.setInt(12, po.getPredictNumber());
+			if (po.getHaveChild()) {
+				statement.setInt(13, 1);
+			} else {
+				statement.setInt(13, 0);
+			}
 
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -100,9 +108,11 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	 * @return OrderPO
 	 */
 	private OrderPO getOrderPO(int orderID, String userName, String hotelName, OrderStatus orderStatus, int price,
-			RoomType roomType, int roomNumber, Timestamp setTime, Date checkIn, Date checkOut) {
+			RoomType roomType, int roomNumber, Timestamp setTime, Date checkIn, Date checkOut, Timestamp deadline,
+			int predictNumber, int haveChild) {
+		boolean mark = haveChild == 1 ? true : false;
 		return new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut);
+				checkOut, deadline, predictNumber, mark);
 	}
 
 	/**
@@ -127,7 +137,8 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 				list.add(getOrderPO(result.getInt(1), result.getString(2), result.getString(3),
 						OrderStatus.valueOf(result.getString(4)), result.getInt(5),
 						RoomType.valueOf(result.getString(6)), result.getInt(7), result.getTimestamp(8),
-						result.getDate(9), result.getDate(10)));
+						result.getDate(9), result.getDate(10), result.getTimestamp(11), result.getInt(12),
+						result.getInt(13)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -161,7 +172,8 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 				return getOrderPO(result.getInt(1), result.getString(2), result.getString(3),
 						OrderStatus.valueOf(result.getString(4)), result.getInt(5),
 						RoomType.valueOf(result.getString(6)), result.getInt(7), result.getTimestamp(8),
-						result.getDate(9), result.getDate(10));
+						result.getDate(9), result.getDate(10), result.getTimestamp(11), result.getInt(12),
+						result.getInt(13));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -208,7 +220,8 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 				list.add(getOrderPO(result.getInt(1), result.getString(2), result.getString(3),
 						OrderStatus.valueOf(result.getString(4)), result.getInt(5),
 						RoomType.valueOf(result.getString(6)), result.getInt(7), result.getTimestamp(8),
-						result.getDate(9), result.getDate(10)));
+						result.getDate(9), result.getDate(10), result.getTimestamp(11), result.getInt(12),
+						result.getInt(13)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -237,9 +250,9 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 //	public static void main(String args[]) throws RemoteException {
 //		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
 //		o.initOrderDataService();
-//		 o.insertOrder(new OrderPO(60102931, "庄宇州", "天字一号房",
-//		 OrderStatus.Abnormal, 100, RoomType.KING_SIZE_ROOM, 2,
-//		 new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0)));
+//		o.insertOrder(new OrderPO(60102931, "庄宇州", "天字一号房", OrderStatus.Abnormal, 100, RoomType.KING_SIZE_ROOM, 2,
+//				new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0),
+//				new Timestamp(System.currentTimeMillis()), 0, true));
 //		o.findOrderByOrderID(60102931);
 //		o.deleteOrder(60102931);
 //		o.findOrderByUserName("tom");
