@@ -28,6 +28,9 @@ public class OrderDataServiceTest {
 	private Timestamp setTime;
 	private Date checkIn;
 	private Date checkOut;
+	Timestamp deadline;
+	int predictNumber;
+	boolean haveChild;
 	private OrderPO opo;
 
 	/**
@@ -38,8 +41,8 @@ public class OrderDataServiceTest {
 	public void setUp() throws Exception {
 		orderDataService = new OrderDataServiceMySqlImpl();
 		orderID = 18;
-		userName = "庄刚轻";
-		hotelName = "刚轻厂";
+		userName = "中国";
+		hotelName = "世界";
 		orderStatus = OrderStatus.Abnormal;
 		price = 200;
 		roomType = RoomType.KING_SIZE_ROOM;
@@ -47,6 +50,9 @@ public class OrderDataServiceTest {
 		setTime = new Timestamp(System.currentTimeMillis());
 		checkIn = new Date(System.currentTimeMillis());
 		checkOut = new Date(System.currentTimeMillis());
+		deadline = new Timestamp(System.currentTimeMillis());
+		predictNumber = 10;
+		haveChild = true;
 		orderDataService.initOrderDataService();
 	}
 
@@ -57,7 +63,7 @@ public class OrderDataServiceTest {
 	@Test
 	public void testInsertOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut);
+				checkOut,deadline,predictNumber,haveChild);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
 		assertEquals(userName, opoTemp.getUserName());
@@ -79,7 +85,7 @@ public class OrderDataServiceTest {
 	@Test
 	public void testDeleteOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut);
+				checkOut,deadline,predictNumber,haveChild);
 		orderDataService.insertOrder(opo);
 		orderDataService.deleteOrder(orderID);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
@@ -93,7 +99,7 @@ public class OrderDataServiceTest {
 	@Test
 	public void testUpdateOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut);
+				checkOut,deadline,predictNumber,haveChild);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
 		assertEquals(userName, opoTemp.getUserName());
@@ -129,7 +135,7 @@ public class OrderDataServiceTest {
 	@Test
 	public void testFindOrderByOrderID() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut);
+				checkOut,deadline,predictNumber,haveChild);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
 		assertEquals(userName, opoTemp.getUserName());
@@ -151,7 +157,7 @@ public class OrderDataServiceTest {
 	@Test
 	public void testFindOrderByUserName() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut);
+				checkOut,deadline,predictNumber,haveChild);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByUserName(userName).get(0);
 		assertEquals(userName, opoTemp.getUserName());
@@ -173,7 +179,7 @@ public class OrderDataServiceTest {
 	@Test
 	public void testFindOrderByHotelName() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut);
+				checkOut,deadline,predictNumber,haveChild);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByHotelName(hotelName).get(0);
 		assertEquals(userName, opoTemp.getUserName());
