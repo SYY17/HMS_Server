@@ -30,6 +30,11 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 	public void insertFullCutPromotion(FullCutPromotionPO fpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
+			ArrayList<FullCutPromotionPO> list = findsFullPromotion(fpo.getID(), fpo.getContent(), fpo.getStartTime());
+			for(int i = 0; i < list.size(); i++){
+				if(list.get(i).getContent().equals(fpo.getContent())) return;
+			}
+			
 			//列：id; name; content; start; stop; every; cut
 			statement = connect.prepareStatement("insert into fullcutpromotion values(?, ?, ?, ?, ?, ?, ?)");
 			
@@ -198,14 +203,14 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 		return date;
 	}
 	
-//	
+	
 //	public static void main(String[]args) throws RemoteException{
 //		FullCutPromotionDataServiceMySqlImpl p = new FullCutPromotionDataServiceMySqlImpl();
 //		p.initFullCutPromotionDataService();
-//		
+		
 //		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
-//		p.insertFullCutPromotion(new FullCutPromotionPO("Sixth","SixthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341,200,20));
-//		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+//		p.insertFullCutPromotion(new FullCutPromotionPO("AAA","SixthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341,200,20));
+///		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
 //		p.finishFullCutPromotionDataService();
 //	}
 	

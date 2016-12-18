@@ -30,6 +30,10 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 	public void insertDiscountPromotion(DiscountPromotionPO dpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
+			ArrayList<DiscountPromotionPO> list = findsDiscountPromotion(dpo.getID(), dpo.getContent(), dpo.getStartTime());
+			for(int i = 0; i < list.size(); i++){
+				if(list.get(i).getContent().equals(dpo.getContent())) return;
+			}
 			//列：id; name; content; start; stop; discount
 			statement = connect.prepareStatement("insert into discountpromotion values(?, ?, ?, ?, ?, ?)");
 			
@@ -81,13 +85,13 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(date);
 	}
-	/*
-	public static void main(String[]args) throws RemoteException{
+	
+/*	public static void main(String[]args) throws RemoteException{
 		DiscountPromotionDataServiceMySqlImpl p = new DiscountPromotionDataServiceMySqlImpl();
 		p.initDiscountPromotionDataService();
 		
 		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
-		p.insertDiscountPromotion(new DiscountPromotionPO("新的尝试","SeventhPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
+		p.insertDiscountPromotion(new DiscountPromotionPO("QQQ","SeventhPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
 		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
 		p.finishDiscountPromotionDataService();
 	}
