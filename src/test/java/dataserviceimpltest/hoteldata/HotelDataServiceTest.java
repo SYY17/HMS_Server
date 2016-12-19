@@ -60,7 +60,6 @@ public class HotelDataServiceTest {
 		assertEquals(h, null);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void test1_InsertHotel() throws RemoteException{
 		hpo = new HotelPO(hotelID, hotelName, hotelAddress, businessArea, hotelDescription, starLevel, 
@@ -76,7 +75,6 @@ public class HotelDataServiceTest {
 		assertEquals(phoneNumber, h.getPhoneNumber());
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void test2_updateHotel() throws RemoteException{
 		HotelPO hpo2 = new HotelPO(hotelID, "名字", "花果山", businessArea, hotelDescription, starLevel, 
@@ -96,7 +94,6 @@ public class HotelDataServiceTest {
 		hotelDataService.updateHotel(hpo);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void test3_findHotel() throws RemoteException{
 		hpo = new HotelPO(hotelID, hotelName, hotelAddress, businessArea, hotelDescription, starLevel, 
@@ -112,7 +109,6 @@ public class HotelDataServiceTest {
 		assertEquals(phoneNumber, h.getPhoneNumber());
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void test4_findsHotel() throws RemoteException{
 		hpo = new HotelPO(hotelID, hotelName, hotelAddress, businessArea, hotelDescription, starLevel, 
@@ -128,7 +124,6 @@ public class HotelDataServiceTest {
 		assertEquals(phoneNumber, list.get(0).getPhoneNumber());
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void test5_findsAllHotel() throws RemoteException{
 		hpo = new HotelPO(hotelID, hotelName, hotelAddress, businessArea, hotelDescription, starLevel, 
