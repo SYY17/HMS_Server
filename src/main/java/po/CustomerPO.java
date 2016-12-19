@@ -11,18 +11,22 @@ public class CustomerPO extends UserPO {
 	String phoneNumber;
 	String email;
 	String address;
+	int member;
+	String enterprise;
 
-	public CustomerPO(int i, String n, String p, Date b, String pN, String e, String a) {
+	public CustomerPO(int i, String n, String p, Date b, String pN, String e, String a, int m, String et) {
 		// TODO Auto-generated constructor stub
 		super(i, n, p);
 		birthday = b;
 		phoneNumber = pN;
 		email = e;
 		address = a;
+		member = m;
+		enterprise = et;
 	}
 
-	public CustomerPO(UserPO upo, Date b, String pN, String e, String a) {
-		this(upo.getID(), upo.getName(), upo.getPassword(), b, pN, e, a);
+	public CustomerPO(UserPO upo, Date b, String pN, String e, String a, int m, String et) {
+		this(upo.getID(), upo.getName(), upo.getPassword(), b, pN, e, a, m, et);
 	}
 
 	/**
@@ -55,5 +59,21 @@ public class CustomerPO extends UserPO {
 	 */
 	public String getAddress() {
 		return address;
+	}
+	
+	/**
+	 * 
+	 * @return 获取会员种类
+	 */
+	public int getMember(){
+		return member;
+	}
+	
+	/**
+	 * 
+	 * @return 获取企业名称
+	 */
+	public String getEnterprise(){
+		return enterprise;
 	}
 }

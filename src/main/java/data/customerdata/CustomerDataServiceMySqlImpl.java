@@ -36,12 +36,14 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 		boolean result = false;
 		
 		try {
-			statement = connect.prepareStatement("insert into customer values(?, ?, ?, ?, ?)");
+			statement = connect.prepareStatement("insert into customer values(?, ?, ?, ?, ?, ?, ?)");
 			statement.setString(1, username);
 			statement.setDate(2, null);
 			statement.setString(3, null);
 			statement.setString(4, null);
 			statement.setString(5, null);
+			statement.setInt(6, 0);
+			statement.setString(7, null);
 			
 			result = !statement.execute();
 		} catch (SQLException e) {
@@ -63,13 +65,14 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 		// TODO Auto-generated method stub
 		boolean result = false;
 		try {
-			statement = connect.prepareStatement("update customer set birthday = ?, email = ?, phone = ?, address = ? where username = ?");
+			statement = connect.prepareStatement("update customer set birthday = ?, email = ?, phone = ?, address = ?, enterprise = ? where username = ?");
 			
 			statement.setDate(1, cpo.getBirthday());
 			statement.setString(2, cpo.getEmail());
 			statement.setString(3, cpo.getPhoneNumber());
 			statement.setString(4, cpo.getAddress());
 			statement.setString(5, cpo.getName());
+			statement.setString(6, cpo.getEnterprise());
 			
 			result = !statement.execute();
 		} catch (SQLException e) {
@@ -101,6 +104,8 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 			String phone = "";
 			String email = "";
 			String address = "";
+			int member = -1;
+			String enterprise = "";
 			
 			//遍历result
 			while(result.next()){
@@ -108,10 +113,12 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 				phone = result.getString(3);
 				email = result.getString(4);
 				address = result.getString(5);
+				member = result.getInt(6);
+				enterprise = result.getString(7);
 			}
 			
 			if(birthday != null){
-				return new CustomerPO(new UserPO(0, username, null), birthday, phone, email, address);
+				return new CustomerPO(new UserPO(0, username, null), birthday, phone, email, address, member, enterprise);
 			}
 			
 		} catch (SQLException e) {

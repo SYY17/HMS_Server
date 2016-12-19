@@ -24,6 +24,8 @@ public class CustomerDataServiceTest{
 	String phoneNumber;
 	String email;
 	String address;
+	int member;
+	String enterprise;
 	UserPO upo;
 	CustomerPO cpo;
 	
@@ -40,8 +42,10 @@ public class CustomerDataServiceTest{
 		phoneNumber = "10011011100";
 		email = "test@email.com";
 		address = "test address";
+		member = 1;
+		enterprise = "test enterprise";
 		upo = new UserPO(10912012, username, "000000");
-		cpo = new CustomerPO(upo, birthday, phoneNumber, email, address);
+		cpo = new CustomerPO(upo, birthday, phoneNumber, email, address, member, enterprise);
 		
 		//启动服务
 		customerDataService.initCustomerDataService();
