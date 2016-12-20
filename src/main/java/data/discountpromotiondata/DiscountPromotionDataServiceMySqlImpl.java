@@ -30,10 +30,11 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 	public void insertDiscountPromotion(DiscountPromotionPO dpo) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
+			/*
 			ArrayList<DiscountPromotionPO> list = findsDiscountPromotion(dpo.getID(), dpo.getContent(), dpo.getStartTime());
 			for(int i = 0; i < list.size(); i++){
 				if(list.get(i).getContent().equals(dpo.getContent())) return;
-			}
+			}*/
 			//列：id; name; content; start; stop; discount
 			statement = connect.prepareStatement("insert into discountpromotion values(?, ?, ?, ?, ?, ?)");
 			
