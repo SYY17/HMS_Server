@@ -5,7 +5,7 @@ import java.sql.Date;
 
 import po.PromotionType;
 
-public class PromotionPO implements Serializable, Promotion{
+public class PromotionPO implements Serializable {
 	/**
 	 * 
 	 */
@@ -74,9 +74,8 @@ public class PromotionPO implements Serializable, Promotion{
 		return id;
 	}
 
-	@Override
+	
 	public double calculatePayment(double sum) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

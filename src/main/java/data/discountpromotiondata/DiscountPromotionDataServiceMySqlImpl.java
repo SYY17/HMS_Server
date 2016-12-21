@@ -197,7 +197,7 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 	}
 	
 	private Date parse(String s){
-		java.util.Date d = null;
+		/*java.util.Date d = null;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try{
 			d = (Date) format.parse(s);
@@ -205,7 +205,16 @@ public class DiscountPromotionDataServiceMySqlImpl implements DiscountPromotionD
 			e.printStackTrace();
 		}
 		Date date = new Date(d.getTime());
-		return date;
+		return date;*/
+		Date dateS =null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try{
+			java.util.Date date =  format.parse(s);
+			dateS = new Date(date.getTime());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return dateS;
 	}
 	
 }

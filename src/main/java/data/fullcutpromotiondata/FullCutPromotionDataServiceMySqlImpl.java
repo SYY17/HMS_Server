@@ -192,6 +192,7 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 	}
 
 	private Date parse(String s){
+		/*
 		java.util.Date d = null;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try{
@@ -200,18 +201,30 @@ public class FullCutPromotionDataServiceMySqlImpl implements FullCutPromotionDat
 			e.printStackTrace();
 		}
 		Date date = new Date(d.getTime());
-		return date;
+		return date;*/
+		Date dateS =null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try{
+			java.util.Date date =  format.parse(s);
+			dateS = new Date(date.getTime());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return dateS;
 	}
 	
 	
 //	public static void main(String[]args) throws RemoteException{
-//		FullCutPromotionDataServiceMySqlImpl p = new FullCutPromotionDataServiceMySqlImpl();
-//		p.initFullCutPromotionDataService();
-		
+	//	FullCutPromotionDataServiceMySqlImpl p = new FullCutPromotionDataServiceMySqlImpl();
+		//p.initFullCutPromotionDataService();
+		//ArrayList<FullCutPromotionPO> list = p.findsFullPromotion(20902341);
+		//for(int i=0;i<list.size();i++){
+			//System.out.println(list.get(i).getPromotionName());
+		//}
 //		//p.insertDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
 //		p.insertFullCutPromotion(new FullCutPromotionPO("AAA","SixthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341,200,20));
 ///		//p.deleteDiscountPromotion(new DiscountPromotionPO("Third","ThirdPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341,0.8));
-//		p.finishFullCutPromotionDataService();
-//	}
+		//p.finishFullCutPromotionDataService();
+	//}
 	
 }
