@@ -494,6 +494,15 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		orderDataService.updateOrder(id, status);
 	}
 
+	/**
+	 * 
+	 * @param id,room
+	 * @throws RemoteException
+	 */
+	@Override
+	public void updateOrder(int id, String room) throws RemoteException{
+		orderDataService.updateOrder(id, room);
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

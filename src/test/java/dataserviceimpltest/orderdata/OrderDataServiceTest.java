@@ -31,10 +31,12 @@ public class OrderDataServiceTest {
 	Timestamp deadline;
 	int predictNumber;
 	boolean haveChild;
+	String room;
 	private OrderPO opo;
 
 	/**
 	 * 初始化
+	 * 
 	 * @throws Excpetion
 	 */
 	@Before
@@ -58,12 +60,13 @@ public class OrderDataServiceTest {
 
 	/**
 	 * 增加订单的测试用例套件
+	 * 
 	 * @throws RemoteException
 	 */
 	@Test
 	public void testInsertOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut,deadline,predictNumber,haveChild);
+				checkOut, deadline, predictNumber, haveChild, null);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
 		assertEquals(userName, opoTemp.getUserName());
@@ -80,12 +83,13 @@ public class OrderDataServiceTest {
 
 	/**
 	 * 删除订单的测试用例套件
+	 * 
 	 * @throws RemoteException
 	 */
 	@Test
 	public void testDeleteOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut,deadline,predictNumber,haveChild);
+				checkOut, deadline, predictNumber, haveChild,null);
 		orderDataService.insertOrder(opo);
 		orderDataService.deleteOrder(orderID);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
@@ -94,12 +98,13 @@ public class OrderDataServiceTest {
 
 	/**
 	 * 更新订单状态的测试用例套件
+	 * 
 	 * @throws RemoteException
 	 */
 	@Test
 	public void testUpdateOrder() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut,deadline,predictNumber,haveChild);
+				checkOut, deadline, predictNumber, haveChild,null);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
 		assertEquals(userName, opoTemp.getUserName());
@@ -111,15 +116,16 @@ public class OrderDataServiceTest {
 		assertEquals(setTime.getTime(), opoTemp.getSetTime().getTime());
 		assertEquals(checkIn.toString(), opoTemp.getCheckIn().toString());
 		assertEquals(checkOut.toString(), opoTemp.getCheckOut().toString());
-		
-		orderDataService.updateOrder(orderID, OrderStatus.Finished);
+
+		orderDataService.updateOrder(orderID, "123");
 		opoTemp = orderDataService.findOrderByOrderID(orderID);
-		assertEquals(OrderStatus.Finished.toString(), opoTemp.getOrderStatus().toString());
+		assertEquals("123", opoTemp.getRoom());
 		orderDataService.deleteOrder(orderID);
 	}
 
 	/**
 	 * 查找全部订单的测试用例套件
+	 * 
 	 * @throws RemoteException
 	 */
 	@Test
@@ -130,12 +136,13 @@ public class OrderDataServiceTest {
 
 	/**
 	 * 通过订单号查找订单的测试用例套件
+	 * 
 	 * @throws RemoteException
 	 */
 	@Test
 	public void testFindOrderByOrderID() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut,deadline,predictNumber,haveChild);
+				checkOut, deadline, predictNumber, haveChild, null);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByOrderID(orderID);
 		assertEquals(userName, opoTemp.getUserName());
@@ -152,12 +159,13 @@ public class OrderDataServiceTest {
 
 	/**
 	 * 通过用户名查找订单的测试用例套件
+	 * 
 	 * @throws RemoteException
 	 */
 	@Test
 	public void testFindOrderByUserName() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut,deadline,predictNumber,haveChild);
+				checkOut, deadline, predictNumber, haveChild, null);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByUserName(userName).get(0);
 		assertEquals(userName, opoTemp.getUserName());
@@ -174,12 +182,13 @@ public class OrderDataServiceTest {
 
 	/**
 	 * 通过酒店名称查找订单的测试用例套件
+	 * 
 	 * @throws RemoteException
 	 */
 	@Test
 	public void testFindOrderByHotelName() throws RemoteException {
 		opo = new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut,deadline,predictNumber,haveChild);
+				checkOut, deadline, predictNumber, haveChild, null);
 		orderDataService.insertOrder(opo);
 		OrderPO opoTemp = orderDataService.findOrderByHotelName(hotelName).get(0);
 		assertEquals(userName, opoTemp.getUserName());

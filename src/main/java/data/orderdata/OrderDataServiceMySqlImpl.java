@@ -39,7 +39,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	public void insertOrder(OrderPO po) throws RemoteException {
 		try {
 			statement = connect
-					.prepareStatement("insert into hms_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ? , ?)");
+					.prepareStatement("insert into hms_order values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ? , ?,?)");
 
 			statement.setInt(1, po.getOrderID());
 			statement.setString(2, po.getUserName());
@@ -58,6 +58,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 			} else {
 				statement.setInt(13, 0);
 			}
+			statement.setString(14, po.getRoom());
 
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -101,6 +102,25 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id,room
+	 * @throws RemoteException
+	 */
+	@Override
+	public void updateOrder(int id, String room) throws RemoteException {
+		try {
+			statement = connect.prepareStatement("update hms_order set room = ? where orderid = ?");
+
+			statement.setString(1, room);
+			statement.setInt(2, id);
+
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 
@@ -109,10 +129,10 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 	 */
 	private OrderPO getOrderPO(int orderID, String userName, String hotelName, OrderStatus orderStatus, int price,
 			RoomType roomType, int roomNumber, Timestamp setTime, Date checkIn, Date checkOut, Timestamp deadline,
-			int predictNumber, int haveChild) {
+			int predictNumber, int haveChild, String room) {
 		boolean mark = haveChild == 1 ? true : false;
 		return new OrderPO(orderID, userName, hotelName, orderStatus, price, roomType, roomNumber, setTime, checkIn,
-				checkOut, deadline, predictNumber, mark);
+				checkOut, deadline, predictNumber, mark, room);
 	}
 
 	/**
@@ -138,7 +158,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 						OrderStatus.valueOf(result.getString(4)), result.getInt(5),
 						RoomType.valueOf(result.getString(6)), result.getInt(7), result.getTimestamp(8),
 						result.getDate(9), result.getDate(10), result.getTimestamp(11), result.getInt(12),
-						result.getInt(13)));
+						result.getInt(13), result.getString(14)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -173,7 +193,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 						OrderStatus.valueOf(result.getString(4)), result.getInt(5),
 						RoomType.valueOf(result.getString(6)), result.getInt(7), result.getTimestamp(8),
 						result.getDate(9), result.getDate(10), result.getTimestamp(11), result.getInt(12),
-						result.getInt(13));
+						result.getInt(13), result.getString(14));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -221,7 +241,7 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 						OrderStatus.valueOf(result.getString(4)), result.getInt(5),
 						RoomType.valueOf(result.getString(6)), result.getInt(7), result.getTimestamp(8),
 						result.getDate(9), result.getDate(10), result.getTimestamp(11), result.getInt(12),
-						result.getInt(13)));
+						result.getInt(13), result.getString(14)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -247,17 +267,18 @@ public class OrderDataServiceMySqlImpl implements OrderDataService {
 		configure.finish(connect, statement, result);
 	}
 
-//	public static void main(String args[]) throws RemoteException {
-//		OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
-//		o.initOrderDataService();
-//		o.insertOrder(new OrderPO(60102931, "庄宇州", "天字一号房", OrderStatus.Abnormal, 100, RoomType.KING_SIZE_ROOM, 2,
-//				new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0),
-//				new Timestamp(System.currentTimeMillis()), 0, true));
-//		o.findOrderByOrderID(60102931);
-//		o.deleteOrder(60102931);
-//		o.findOrderByUserName("tom");
-//		ArrayList<OrderPO> opo = o.findOrderByHotelName("盘丝洞");
-//		System.out.println(opo.size());
-//		o.finishOrderDataService();
-//	}
+	// public static void main(String args[]) throws RemoteException {
+	// OrderDataServiceMySqlImpl o = new OrderDataServiceMySqlImpl();
+	// o.initOrderDataService();
+	// o.insertOrder(new OrderPO(60102931, "庄宇州", "天字一号房", OrderStatus.Abnormal,
+	// 100, RoomType.KING_SIZE_ROOM, 2,
+	// new Timestamp(System.currentTimeMillis()), new Date(0), new Date(0),
+	// new Timestamp(System.currentTimeMillis()), 0, true));
+	// o.findOrderByOrderID(60102931);
+	// o.deleteOrder(60102931);
+	// o.findOrderByUserName("tom");
+	// ArrayList<OrderPO> opo = o.findOrderByHotelName("盘丝洞");
+	// System.out.println(opo.size());
+	// o.finishOrderDataService();
+	// }
 }

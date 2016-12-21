@@ -29,6 +29,13 @@ public interface OrderDataService extends Remote{
 	 * @throws RemoteException
 	 */
 	public void updateOrder(int id, OrderStatus status) throws RemoteException;
+	
+	/**
+	 * 
+	 * @param id,room
+	 * @throws RemoteException
+	 */
+	public void updateOrder(int id, String room) throws RemoteException;
 
 	/**
 	 * 

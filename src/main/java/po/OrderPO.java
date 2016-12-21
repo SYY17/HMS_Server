@@ -22,9 +22,10 @@ public class OrderPO implements Serializable {
 	Timestamp deadline;
 	int predictNumber;
 	boolean haveChild;
+	String room;
 
 	public OrderPO(int orderid, String un, String hn, OrderStatus orderstatus, int pr, RoomType rT, int rn, Timestamp s,
-			Date ci, Date co, Timestamp dl, int pn, boolean hc) {
+			Date ci, Date co, Timestamp dl, int pn, boolean hc,String r) {
 		orderID = orderid;
 		orderStatus = orderstatus;
 		price = pr;
@@ -38,6 +39,7 @@ public class OrderPO implements Serializable {
 		deadline = dl;
 		predictNumber = pn;
 		haveChild = hc;
+		room = r;
 	}
 
 	/**
@@ -142,5 +144,13 @@ public class OrderPO implements Serializable {
 	 */
 	public boolean getHaveChild() {
 		return haveChild;
+	}
+	
+	/**
+	 * 
+	 * @return 获得订单对应房间号
+	 */
+	public String getRoom() {
+		return room;
 	}
 }
