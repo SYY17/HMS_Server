@@ -38,7 +38,7 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 		try {
 			statement = connect.prepareStatement("insert into customer values(?, ?, ?, ?, ?, ?, ?)");
 			statement.setString(1, username);
-			statement.setDate(2, null);
+			statement.setDate(2, new Date(System.currentTimeMillis()));
 			statement.setString(3, null);
 			statement.setString(4, null);
 			statement.setString(5, null);
@@ -71,8 +71,8 @@ public class CustomerDataServiceMySqlImpl implements CustomerDataService{
 			statement.setString(2, cpo.getEmail());
 			statement.setString(3, cpo.getPhoneNumber());
 			statement.setString(4, cpo.getAddress());
-			statement.setString(5, cpo.getName());
-			statement.setString(6, cpo.getEnterprise());
+			statement.setString(6, cpo.getName());
+			statement.setString(5, cpo.getEnterprise());
 			
 			result = !statement.execute();
 		} catch (SQLException e) {
