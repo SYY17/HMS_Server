@@ -265,20 +265,58 @@ public class PromotionDataServiceMySqlImpl implements PromotionDataService{
 		else
 			return "DEFAUT";
 	}
+
+	@Override
+	public ArrayList<PromotionPO> getAllPromotion() throws RemoteException {
+		// TODO Auto-generated method stu
+		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();
+		
+		try {
+			statement = connect.prepareStatement("select * from promotion");
+			
+			//列：id; name; content; start； stop; promotionType
+			result = statement.executeQuery();
+			String tempId;
+			String tempName;
+			String tempContent;
+			String tempStart;
+			String tempStop;
+			String tempPromotionType;////............................
+			
+			//遍历result
+			while(result.next()){
+				tempId = result.getString (1);
+				tempName = result.getString(2);
+				tempContent = result.getString(3);
+				tempStart = result.getString(4);
+				tempStop = result.getString(5);//
+				tempPromotionType = result.getString(6);//
+				list.add(new PromotionPO( tempName, tempContent, parse(tempStart), parse(tempStop), parsePromotionType(tempPromotionType), Integer.parseInt(tempId)));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	/*
 	public static void main(String[]args) throws RemoteException{
 		PromotionDataServiceMySqlImpl p = new PromotionDataServiceMySqlImpl();
 		p.initPromotionDataService();
 		
-		ArrayList<PromotionPO> list = p.findsPromotion(20902341,"双十二",Date.valueOf("2016-12-01"));
+		ArrayList<PromotionPO> list = p.getAllPromotion();
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i).getPromotionName());
 		}
-		p.insertPromotion(new PromotionPO("中文尝试","EighthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341));
+		//p.insertPromotion(new PromotionPO("中文尝试","EighthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.DISCOUNT,20902341));
 		//p.insertPromotion(new PromotionPO("Fourth","FourthPromotion",Date.valueOf("2016-12-01"),Date.valueOf("2016-12-31"),PromotionType.FULL_CUT,20902341));
 		
 		p.finishPromotionDataService();
-	}
-	*/
+	}*/
+	
 }

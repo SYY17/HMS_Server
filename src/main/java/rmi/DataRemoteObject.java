@@ -979,4 +979,10 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		return fullCutPromotionDataService.findsFullPromotion(id, content);
 	}
 
+	@Override
+	public ArrayList<PromotionPO> getAllPromotion() throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionDataService.getAllPromotion();
+	}
+
 }

@@ -67,4 +67,11 @@ public interface PromotionDataService extends Remote{
 	 * @throws RemoteException
 	 */
 	public void finishPromotionDataService() throws RemoteException;
+	
+	//
+	/**
+	 * @return 查找并返回所有营销策略信息
+	 * @throws RemoteException
+	 */
+	public ArrayList<PromotionPO> getAllPromotion() throws RemoteException;
 }
