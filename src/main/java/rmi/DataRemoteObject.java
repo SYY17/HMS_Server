@@ -27,6 +27,7 @@ import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.roomdataservice.RoomDataService;
 import dataservice.usercredithistoryservice.UserCreditHistoryDataService;
 import dataservice.userdataservice.UserDataService;
+import po.CreditMovement;
 import po.CreditPO;
 import po.CustomerPO;
 import po.DiscountPromotionPO;
@@ -831,9 +832,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	 * @see dataservice.usercredithistoryservice.UserCreditHistoryDataService#updateHistory(po.UserCreditHistoryPO)
 	 */
 	@Override
-	public void updateHistory(UserCreditHistoryPO ucpo) throws RemoteException {
+	public void updateHistory(int userID, int change, Date date, CreditMovement creditMovement, int remain) throws RemoteException {
 		// TODO Auto-generated method stub
-		userCreditHistoryDataService.updateHistory(ucpo);
+		userCreditHistoryDataService.updateHistory(userID, change, date, creditMovement, remain);
 	}
 
 	/*
