@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="0" name="dataserviceimpltest.orderdata.OrderDataServiceTest" time="0.218" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="dataserviceimpltest.orderdata.OrderDataServiceTest" time="0.157" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre/lib"/>
@@ -26,7 +26,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/zhuangyz1998/Documents/Code/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf3338264567887268044.tmp"/>
+    <property name="classworlds.conf" value="/Users/zhuangyz1998/Documents/Code/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf3546422128540808510.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/zhuangyz1998/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -59,11 +59,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testDeleteOrder" time="0.042"/>
-  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testUpdateOrder" time="0.021"/>
-  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrderByUserName" time="0.027"/>
-  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testInsertOrder" time="0.021"/>
-  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrderByHotelName" time="0.011"/>
-  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrderByOrderID" time="0.027"/>
-  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrder" time="0.069"/>
+  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testDeleteOrder" time="0.019"/>
+  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testUpdateOrder" time="0.018"/>
+  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrderByUserName" time="0.014"/>
+  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testInsertOrder" time="0.01"/>
+  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrderByHotelName" time="0.014"/>
+  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrderByOrderID" time="0.009"/>
+  <testcase classname="dataserviceimpltest.orderdata.OrderDataServiceTest" name="testFindOrder" time="0.073"/>
 </testsuite>
