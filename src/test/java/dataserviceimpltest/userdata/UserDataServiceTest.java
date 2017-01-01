@@ -37,17 +37,15 @@ public class UserDataServiceTest {
 	 */
 	@Test
 	public void TestFindUser() throws RemoteException {
-		upo = userDataService.findUser("manager");
+		upo = userDataService.findUser("user");
 		
 		//信息完全相同
-		assertEquals("manager", upo.getName());
-		assertEquals("666666", upo.getPassword());
-		assertEquals(41128001, upo.getID());
+		assertEquals(10101001, upo.getID());
 		
-		String username = userDataService.findUser(41128001);
+		String username = userDataService.findUser(10101001);
 		
 		//获取信息不为空
-		assertEquals("manager", username);
+		assertEquals("user", username);
 	}
 	
 	/**

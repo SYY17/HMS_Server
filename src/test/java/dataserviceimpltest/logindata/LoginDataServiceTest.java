@@ -26,8 +26,8 @@ public class LoginDataServiceTest {
 	public void setUp() throws Exception {
 		//初始化数据
 		loginDataService = new LoginDataServiceMySqlImpl();
-		username = "worker";
-		id = 2;
+		username = "庄宇州";
+		id = 4;
 		password = "000000";
 		
 		//启动服务
