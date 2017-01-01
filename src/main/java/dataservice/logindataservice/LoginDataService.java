@@ -3,28 +3,17 @@ package dataservice.logindataservice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import po.UserPO;
-
 public interface LoginDataService extends Remote{
-	
+
 	/**
 	 * 
 	 * @param username
 	 * @param password
 	 * @param id
+	 * @return 是否存在相应用户
 	 * @throws RemoteException
 	 */
-	public void insertUser(String username,String password,int id) throws RemoteException;
-	
-	/**
-	 * 
-	 * @param username
-	 * @param password
-	 * @param id
-	 * @return 按ID查找并返回用户信息
-	 * @throws RemoteException
-	 */
-	public UserPO findUser(int id) throws RemoteException;
+	public boolean isValidateUser(String username, String password, int id) throws RemoteException;
 	
 	/**
 	 * 

@@ -1,5 +1,7 @@
 package dataserviceimpltest.logindata;
 
+import static org.junit.Assert.*;
+
 import java.rmi.RemoteException;
 
 import org.junit.After;
@@ -36,9 +38,10 @@ public class LoginDataServiceTest {
 	 * 
 	 */
 	@Test
-	public void test1_FindUser() {
+	public void test1_IsValidateUser() {
 		try {
-			loginDataService.findUser(id);
+			boolean result = loginDataService.isValidateUser(username, password, id);
+			assertEquals(true, result);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -11,6 +11,7 @@ import data.datafactory.DataFactoryServiceMySqlImpl;
 import data.discountpromotiondata.DiscountPromotionDataServiceMySqlImpl;
 import data.fullcutpromotiondata.FullCutPromotionDataServiceMySqlImpl;
 import data.hoteldata.HotelDataServiceMySqlImpl;
+import data.logindata.LoginDataServiceMySqlImpl;
 import data.orderdata.OrderDataServiceMySqlImpl;
 import data.promotiondata.PromotionDataServiceMySqlImpl;
 import data.roomdata.RoomDataServiceMySqlImpl;
@@ -22,6 +23,7 @@ import dataservice.datafactoryservice.DataFactoryService;
 import dataservice.discountpromotiondataservice.DiscountPromotionDataService;
 import dataservice.fullcutpromotiondataservice.FullCutPromotionDataService;
 import dataservice.hoteldataservice.HotelDataService;
+import dataservice.logindataservice.LoginDataService;
 import dataservice.orderdataservice.OrderDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.roomdataservice.RoomDataService;
@@ -41,13 +43,14 @@ import po.RoomType;
 import po.UserCreditHistoryPO;
 import po.UserPO;
 
-public class DataRemoteObject extends UnicastRemoteObject implements CreditDataService, HotelDataService,
+public class DataRemoteObject extends UnicastRemoteObject implements LoginDataService, CreditDataService, HotelDataService,
 		OrderDataService, PromotionDataService, RoomDataService, UserDataService, UserCreditHistoryDataService, FullCutPromotionDataService, DiscountPromotionDataService, CustomerDataService, DataFactoryService {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4029039744279087114L;
+	private LoginDataService loginDataService;
 	private CreditDataService creditDataService;
 	private HotelDataService hotelDataService;
 	private OrderDataService orderDataService;
@@ -61,6 +64,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 	private DataFactoryService dataFactoryService;
 
 	protected DataRemoteObject() throws RemoteException {
+		loginDataService = new LoginDataServiceMySqlImpl();
 		creditDataService = new CreditDataServiceMySqlImpl();
 		hotelDataService = new HotelDataServiceMySqlImpl();
 		orderDataService = new OrderDataServiceMySqlImpl();
@@ -72,6 +76,31 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		discountPromotionDataService = new DiscountPromotionDataServiceMySqlImpl();
 		customerDataService = new CustomerDataServiceMySqlImpl();
 		dataFactoryService = new DataFactoryServiceMySqlImpl();
+	}
+	
+	/**
+	 * loginDataService 以下为登录/注册数据信息服务的通信实现
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.logindataservice.LoginDataService#isValidateUser(java.lang.String, java.lang.String, int)
+	 */
+	@Override
+	public boolean isValidateUser(String username, String password, int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return loginDataService.isValidateUser(username, password, id);
+	}
+
+	@Override
+	public void initLoginDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		loginDataService.initLoginDataService();
+	}
+
+	@Override
+	public void finishLoginDataService() throws RemoteException {
+		// TODO Auto-generated method stub
+		loginDataService.finishLoginDataService();
 	}
 
 	/**
@@ -940,6 +969,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		customerDataService.finishCustomerDataService();
 	}
 
+	/**
+	 * discountPromotionDataService 以下为折扣类营销策略数据信息服务的通信实现
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#findsDiscountPromotion(int, java.lang.String, java.sql.Date)
+	 */
 	@Override
 	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, String content, Date start)
 			throws RemoteException {
@@ -947,48 +983,83 @@ public class DataRemoteObject extends UnicastRemoteObject implements CreditDataS
 		return discountPromotionDataService.findsDiscountPromotion(id, content, start);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#findsDiscountPromotion(int)
+	 */
 	@Override
 	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return discountPromotionDataService.findsDiscountPromotion(id);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#findsDiscountPromotion(int, java.sql.Date)
+	 */
 	@Override
 	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, Date start) throws RemoteException {
 		// TODO Auto-generated method stub
 		return discountPromotionDataService.findsDiscountPromotion(id, start);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.discountpromotiondataservice.DiscountPromotionDataService#findsDiscountPromotion(int, java.lang.String)
+	 */
 	@Override
 	public ArrayList<DiscountPromotionPO> findsDiscountPromotion(int id, String content) throws RemoteException {
 		// TODO Auto-generated method stub
 		return discountPromotionDataService.findsDiscountPromotion(id, content);
 	}
 
+	/**
+	 * fullCutPromotionDataService 以下为满减类营销策略数据信息服务的通信实现
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#findsFullPromotion(int, java.lang.String, java.sql.Date)
+	 */
 	@Override
 	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id, String content, Date start) throws RemoteException {
 		// TODO Auto-generated method stub
 		return fullCutPromotionDataService.findsFullPromotion(id, content, start);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#findsFullPromotion(int)
+	 */
 	@Override
 	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return fullCutPromotionDataService.findsFullPromotion(id);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#findsFullPromotion(int, java.sql.Date)
+	 */
 	@Override
 	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id, Date start) throws RemoteException {
 		// TODO Auto-generated method stub
 		return fullCutPromotionDataService.findsFullPromotion(id, start);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.fullcutpromotiondataservice.FullCutPromotionDataService#findsFullPromotion(int, java.lang.String)
+	 */
 	@Override
 	public ArrayList<FullCutPromotionPO> findsFullPromotion(int id, String content) throws RemoteException {
 		// TODO Auto-generated method stub
 		return fullCutPromotionDataService.findsFullPromotion(id, content);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see dataservice.promotiondataservice.PromotionDataService#getAllPromotion()
+	 */
 	@Override
 	public ArrayList<PromotionPO> getAllPromotion() throws RemoteException {
 		// TODO Auto-generated method stub

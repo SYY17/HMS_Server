@@ -7,80 +7,49 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import dataservice.logindataservice.LoginDataService;
-import po.UserPO;
 
 public class LoginDataServiceMySqlImpl implements LoginDataService{
 
 	Connection connect;
 	PreparedStatement statement;
 	ResultSet result;
-	
-	/**
-	 * 
-	 * @param username
-	 * @param password
-	 * @param id
-	 * @throws RemoteException
-	 */
-	@Override
-	public void insertUser(String username, String password, int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		try {
-			//为防止重复插入信息应进行检查
-			if(findUser(id) != null) return;
-			
-			//列：id; username; password
-			statement = connect.prepareStatement("insert into user values(?, ?, ?)");
-			
-			statement.setString(1, String.valueOf(id));
-			statement.setString(2, username);
-			statement.setString(3, password);
-			
-			statement.execute();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * 
 	 * @param username
 	 * @param password
 	 * @param id
-	 * @return 按ID查找并返回用户信息
+	 * @return 是否存在相应用户
 	 * @throws RemoteException
 	 */
-	@Override
-	public UserPO findUser(int id) throws RemoteException {
+	public boolean isValidateUser(String username, String password, int id) throws RemoteException{
 		// TODO Auto-generated method stub
 		try {
-			statement = connect.prepareStatement("select * from user where id = ?");
+			statement = connect.prepareStatement("select id from user where username = ? and password = password(?)");
 			
 			//列：id; username; password
-			statement.setString(1, String.valueOf(id));
+			statement.setString(1, username);
+			statement.setString(2, password);
 			
 			result = statement.executeQuery();
 			
 			//UserPO: id; username; password
-			String username = "";
-			String password = "";
+			int userID = -1;
 			
 			//遍历result
 			while(result.next()){
-				username = result.getString(2);
-				password = result.getString(3);
+				userID = result.getInt(1);
 			}
 			
-			if(username != ""){
-				return new UserPO(id, username, password);
+			if(userID / 10000000 == id){
+				return true;
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 	/**

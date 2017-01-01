@@ -59,7 +59,7 @@ public class UserDataServiceMySqlImpl implements UserDataService{
 			next = next+low;
 			
 			//列：id; username; password
-			statement = connect.prepareStatement("insert into user values(?, ?, ?)");
+			statement = connect.prepareStatement("insert into user values(?, ?, password(?))");
 			
 			statement.setInt(1, next);
 			statement.setString(2, upo.getName());
