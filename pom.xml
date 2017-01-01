@@ -26,6 +26,6 @@
   	  <artifactId>jfxrt</artifactId>
   	  <version>${java.version}</version>
 	  <scope>system</scope>
-  	  <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>	</dependency>
+  	  <systemPath>/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/lib/jfxrt.jar</systemPath>	</dependency>
   </dependencies>
 </project>
